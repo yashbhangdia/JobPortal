@@ -5,7 +5,7 @@ function card(props)
 {
     return (
         <div className="Card col-md-4">
-            <img src={props.src} alt="Hey" className="profile col-md-5"></img>
+            <img src={props.src} alt="Hello" className="profile col-md-5"></img>
             <div className="row pt-4">
                 <div className="Name col-md-8">
                   <h3>{props.name}<span>{props.skill}</span></h3>
