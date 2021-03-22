@@ -31,9 +31,22 @@
   align-items: center;
 }
 
-.search{
+ .search{
   margin-bottom: 1em;
 }
+
+#searchbox {
+  position:relative;
+  left: 19em;
+  width: 40%;
+}
+
+.fa-search {
+  position:absolute;
+  bottom: 0.8em;
+  right: 2em;
+}
+
 
 .searchform Button
 {
