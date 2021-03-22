@@ -3,11 +3,7 @@ import NavBar from './NavbarHome';
 import React, { Component} from 'react';
 import SearchComponent from './SearchComponent';
 import Testimonial from './Testimonials';
-import {   
-  Form,
-  Button,
-  Input,
-} from 'reactstrap';
+import Stats from './Stats';
 
 class App extends Component {
   render() {
@@ -16,7 +12,11 @@ class App extends Component {
         <NavBar></NavBar>
         <div className="HeroImage">
           <SearchComponent></SearchComponent>
-        </div> 
+        </div>
+        <div className="random">
+          ""
+        </div>
+        <Stats />
         <div className="random">
           ""
         </div>
