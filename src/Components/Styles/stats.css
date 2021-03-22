@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
+
+.stats
+{
+    color: white;
+    background-color: #aaa;
+    text-align: center;
+    height: 20rem;
+    font-family: Quicksand;
+    background:linear-gradient(0deg,rgba(228, 130, 87, 0.5), rgba(0, 0, 0, 0.6) ), url("../../Stats.png");
+    background-size: cover;
+}
+
+.heading
+{
+    text-align: center;
+
+    font-family: Quicksand;
+}
+
+.heading h1{
+    color: white;
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.Counter
+{
+    font-weight: 900;
+    font-size: 60px;
+}
+
+.countername
+{
+    font-weight: 700;
+}
