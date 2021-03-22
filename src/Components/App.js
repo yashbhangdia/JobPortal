@@ -3,11 +3,7 @@ import NavBar from './NavbarHome';
 import React, { Component} from 'react';
 import SearchComponent from './SearchComponent';
 import Testimonial from './Testimonials';
-import {   
-  Form,
-  Button,
-  Input,
-} from 'reactstrap';
+
 
 class App extends Component {
   render() {
