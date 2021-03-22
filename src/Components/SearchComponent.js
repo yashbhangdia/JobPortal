@@ -17,11 +17,9 @@ class SearchComponent extends Component
                     <p>Find Jobs, Employment and Career Opportunities</p>
                 </div>
                 <Form className="searchform">
-                    <div id="searchbox" style={{alignItems:"center"}}>
-                        <div className="col-md-11">
-                            <Input style={{borderRadius:"25px"}} type="text" placeholder="Search" className="search"/>
-                            <i className="fa fa-search"></i>
-                        </div>              
+                    <div id="searchbox">
+                            <Input type="text" placeholder="Search" className="Search"/>
+                            <i className="fa fa-search"></i>             
                     </div>
                     <Button>Search</Button>
                 </Form>
