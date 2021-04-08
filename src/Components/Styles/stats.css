@@ -8,7 +8,7 @@
     text-align: center;
     height: 20rem;
     font-family: Quicksand;
-    background:linear-gradient(0deg,rgba(228, 130, 87, 0.5), rgba(0, 0, 0, 0.6) ), url("../../Stats.png");
+    background:linear-gradient(0deg,rgba(228, 130, 87, 0.3), rgba(0, 0, 0, 0.9) ), url("../../Stats.png");
     background-size: cover;
 }
 
