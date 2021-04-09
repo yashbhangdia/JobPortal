@@ -4,6 +4,7 @@ import React, { Component} from 'react';
 import SearchComponent from './SearchComponent';
 import Testimonial from './Testimonials';
 import Stats from './Stats';
+import RecentJobs from './RecentJobs';
 
 class App extends Component {
   render() {
@@ -13,9 +14,7 @@ class App extends Component {
         <div className="HeroImage">
           <SearchComponent></SearchComponent>
         </div>
-        <div className="random">
-          ""
-        </div>
+        <RecentJobs />
         <Stats />
         <div className="random">
           ""
