@@ -4,6 +4,9 @@ import React, { Component} from 'react';
 import SearchComponent from './SearchComponent';
 import Testimonial from './Testimonials';
 import Stats from './Stats';
+import Companies from './Companies';
+import Footer from './Footer';
+import ScrollToTop from './scrollToTop';
 
 class App extends Component {
   render() {
@@ -17,10 +20,9 @@ class App extends Component {
           ""
         </div>
         <Stats />
-        <div className="random">
-          ""
-        </div>
-        <Testimonial />      
+        <Companies />
+        <Testimonial />
+        <Footer/>
       </div>
     );
   }
