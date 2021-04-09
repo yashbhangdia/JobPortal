@@ -16,9 +16,7 @@ function card(props)
             </div>
             <div className="row pt-2 pb-4 mx-0">
                 <div className="col-md-12">
-                    <p className="testimonial">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
+                    <p className="testimonial">{props.msg}</p>
                 </div>
             </div>
         </div>

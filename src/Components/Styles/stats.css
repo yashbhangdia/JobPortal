@@ -6,9 +6,9 @@
     color: white;
     background-color: #aaa;
     text-align: center;
-    height: 20rem;
+    height: 25rem;
     font-family: Quicksand;
-    background:linear-gradient(0deg,rgba(228, 130, 87, 0.3), rgba(0, 0, 0, 0.9) ), url("../../Stats.png");
+    background:linear-gradient(0deg,rgba(228, 130, 87, 0.3), rgba(0, 0, 0, 0.9) ), url("../../handshake.jpg");
     background-size: cover;
 }
 
@@ -28,10 +28,11 @@
 .Counter
 {
     font-weight: 900;
-    font-size: 60px;
+    font-size: 80px;
 }
 
 .countername
 {
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 800;
 }

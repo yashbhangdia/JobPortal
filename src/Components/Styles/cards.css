@@ -37,15 +37,25 @@
     color:#e9896a;
 }
 
-.profile
+ .profile
 {
     position: relative;
+<<<<<<< HEAD
     border-radius: 50%;
     bottom: 30px;
     height: 100px;
     border: 3px solid white;
     /* width: 130px !important; */
 }
+=======
+    bottom: 30px;
+    border-radius: 50%;
+    border: 3px solid white;
+    height: 100px;
+    /*width: 130px !important; */
+} 
+
+>>>>>>> bb1e22d18df15b61db64fafad4f562a9eab03fd6
 
 .testimonial
 {
