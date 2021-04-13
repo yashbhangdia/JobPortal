@@ -76,7 +76,7 @@
 
 hr{
     background-color: rgb(228,130,87);
-    width: 70%;
+    width: 70% !important;
     text-align: left;
     margin-left: 0;
 }

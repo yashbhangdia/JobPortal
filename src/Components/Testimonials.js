@@ -3,19 +3,8 @@ import Card from './Cards';
 import './Styles/Testimonials.css'
 import Slider from "react-slick";
 import ReviewsList from "./Data/Reviews";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-function createReview(Review)
-{
-    return <Card
-        key={Review.id}
-        name={Review.name}
-        skill={Review.skill}
-        src={Review.imgsrc}
-    />
-}
 
 function Testimonial() {
     const config = {
@@ -36,13 +25,9 @@ function Testimonial() {
             </div>
             <div className="container">
             <Slider {...config}>
-<<<<<<< HEAD
-                {ReviewsList.map(createReview)}
-=======
                 {ReviewsList.map((review) => {
                     return <Card name={review.name} skill={review.skill} src={review.imgsrc} msg={review.msg}></Card>
                 })}
->>>>>>> bb1e22d18df15b61db64fafad4f562a9eab03fd6
             </Slider>
             </div>
         </div>

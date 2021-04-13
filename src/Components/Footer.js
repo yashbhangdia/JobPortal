@@ -1,6 +1,7 @@
 import React from 'react';
 import './Styles/Footer.css';
 import Target from './Images/Target.png';
+import envelope from './Images/envelope.gif';
 
 function Footer()
 {
@@ -31,6 +32,9 @@ function Footer()
                         <p>Colin street west, victor 8001, Australia</p>
                         <p>+1 256-22769880</p>
                         <p>info@dreamjob.com</p>
+                    </div>
+                    <div className='col-md-3 pt-3'>
+                        <img src={envelope} className="col-md-12"></img>
                     </div>
                 </div>
             </div>

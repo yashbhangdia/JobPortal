@@ -15,7 +15,7 @@ const jobs=[
 	},
 	{
 		id: 3, 
-		logo: "https://lh3.googleusercontent.com/proxy/RqgxdAva3g3RPKPUr5tiK67PJVU117-KyYAVjJh_ziFSfj2vroHKGRrtuTlUYDzgobKqzrnsLoG4lkHgJBwN_3pZTU5PfGQODXJewon6eMfIiUU1UkwuTk6s9sLK514H20pOKEcjiw",
+		logo: "https://pipap.sprep.org/sites/default/files/credit_suisse.jpg",
 		role: "Web Designer / Developer",
 		company: "Credit Suisse",
 		loc: "Pune, Maharashtra"
@@ -57,7 +57,7 @@ const jobs=[
 	},
 	{
 		id: 9, 
-		logo: "https://lh3.googleusercontent.com/proxy/RqgxdAva3g3RPKPUr5tiK67PJVU117-KyYAVjJh_ziFSfj2vroHKGRrtuTlUYDzgobKqzrnsLoG4lkHgJBwN_3pZTU5PfGQODXJewon6eMfIiUU1UkwuTk6s9sLK514H20pOKEcjiw",
+		logo: "https://pipap.sprep.org/sites/default/files/credit_suisse.jpg",
 		role: "Web Designer / Developer",
 		company: "Credit Suisse",
 		loc: "Pune, Maharashtra"
