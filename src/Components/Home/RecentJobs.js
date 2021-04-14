@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Jobs from './Jobs';
-import JobList from './Data/Job';
-import './Styles/RecentJobs.css'
+import JobList from '../Data/Job';
+import '../Styles/Home/RecentJobs.css'
 
 
 const len = JobList.length;

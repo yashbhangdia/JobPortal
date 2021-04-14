@@ -1,30 +1,20 @@
-import './Styles/App.css';
-import NavBar from './NavbarHome';
-import React, { Component} from 'react';
-import SearchComponent from './SearchComponent';
-import Testimonial from './Testimonials';
-import Stats from './Stats';
-import Companies from './Companies';
-import Footer from './Footer';
-import ScrollToTop from './scrollToTop';
-import RecentJobs from './RecentJobs';
+import React from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Home from './Home/Home';
+import Dummy from './Dummy/dummy';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <NavBar></NavBar>
-        <div className="HeroImage">
-          <SearchComponent></SearchComponent>
-        </div>
-        <RecentJobs />
-        <Stats />
-        <Companies />
-        <Testimonial />
-        <Footer/>
-      </div>
-    );
-  }
+function App(){
+	return(
+		<div>
+			<Router>
+				<Switch>
+					<Route path="/" component={Home} exact/>
+					<Route path="/dummy" component={Dummy}/>
+				</Switch>
+			</Router>
+		</div>
+
+	);
 }
 
 export default App;

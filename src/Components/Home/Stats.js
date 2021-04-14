@@ -1,7 +1,7 @@
-import React , { useEffect, useState } from 'react';
-import './Styles/stats.css';
+import React from 'react';
+import '../Styles/Home/Stats.css';
 import Counter from './Counter';
-import Counterlist from './Data/Counters';
+import Counterlist from '../Data/Counters';
 
 
 function Stats(props)

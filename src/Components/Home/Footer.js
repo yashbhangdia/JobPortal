@@ -1,7 +1,7 @@
 import React from 'react';
-import './Styles/Footer.css';
-import Target from './Images/Target.png';
-import envelope from './Images/envelope.gif';
+import '../Styles/Home/Footer.css';
+import Target from '../Images/Target.png';
+import envelope from '../Images/envelope.gif';
 
 function Footer()
 {

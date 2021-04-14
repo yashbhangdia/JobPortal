@@ -1,5 +1,5 @@
 import React from 'react';
-import './Styles/jobs.css';
+import '../Styles/Home/Jobs.css';
 
 
 function jobs(props){

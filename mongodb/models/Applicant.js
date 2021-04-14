@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var counterSchema = require('../models/counter');
+var counterSchema = require('./counter');
 
 let ApplicantSchema = new Schema({
     Applicant_Id: {type: Number, require:true},
@@ -24,5 +24,5 @@ ApplicantSchema.pre('save', function(next) {
 });
 
 // Export the model
-const Applicant = mongoose.model('Applicant', ApplicantSchema);
+const Applicant = mongoose.model('Applicant', ApplicantSchema, 'Applicant');
 module.exports = Applicant;

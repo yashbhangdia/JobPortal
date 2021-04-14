@@ -1,6 +1,6 @@
 import React from 'react';
-import HSBC from './Images/HSBC.png';
-import Google from './Images/Google1.png';
+import HSBC from '../Images/HSBC.png';
+import Google from '../Images/Google1.png';
 
 function Companies(){
     return (
