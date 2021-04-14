@@ -40,13 +40,12 @@
  .profile
 {
     position: relative;
-    bottom: 30px;
     border-radius: 50%;
-    border: 3px solid white;
+    bottom: 30px;
     height: 100px;
-    /*width: 130px !important; */
-} 
-
+    border: 3px solid white;
+    /* width: 130px !important; */
+}
 
 .testimonial
 {

@@ -3,7 +3,7 @@
 
 .Testimonial
 {
-  background:linear-gradient(0deg, rgba(228, 130, 87, 0.4), rgba(0, 0, 0, 0.8)), url("../../Happy.jpg");
+  background:linear-gradient(0deg, rgba(228, 130, 87, 0.4), rgba(0, 0, 0, 0.9)), url("../../Happy.jpg");
   background-size: cover;
   box-sizing: border-box;
   height: 40rem;

@@ -3,7 +3,6 @@ import Card from './Cards';
 import './Styles/Testimonials.css'
 import Slider from "react-slick";
 import ReviewsList from "./Data/Reviews";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
