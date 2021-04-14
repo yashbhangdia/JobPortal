@@ -1,8 +1,8 @@
 import React from 'react';
 import Card from './Cards';
-import './Styles/Testimonials.css'
+import '../Styles/Home/Testimonials.css'
 import Slider from "react-slick";
-import ReviewsList from "./Data/Reviews";
+import ReviewsList from "../Data/Reviews";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 

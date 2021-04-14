@@ -55,7 +55,7 @@ class NavBar extends Component
             <Nav className="ml-auto">
                 <NavLink className="navlink" href="#home">Home</NavLink>
                 <NavLink className="navlink" href="#About Us">About us</NavLink>
-                <NavLink className="navlink" href="#Products">Products</NavLink>
+                <NavLink className="navlink" href="/dummy">Profile</NavLink>
                 <NavLink className="navlink" href="#SignIn">Sign In</NavLink>
                 <NavLink className="navlink" href="#SignUp">Sign up</NavLink>
             </Nav>

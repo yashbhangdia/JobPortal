@@ -1,8 +1,9 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const app = express();
+const cors = require('cors');
 
 const Applicant = require('./routes/Applicant'); // Imports routes for the Applicants
-const app = express();
+const Company = require('./routes/Company'); // Imports routes for the Companies
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
@@ -17,10 +18,15 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
-app.use('/Applicants', Applicant);
+app.use('/Applicant', Applicant);
+app.use('/Company', Company);
+
+app.use(cors({
+	origin: "http://localhost:3000",
+}));
 
 let port = 1234;
 

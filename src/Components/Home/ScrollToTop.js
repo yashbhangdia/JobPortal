@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './Styles/scroll.css';
+import '../Styles/Home/Scroll.css';
 
 
 export default function ScrollToTop() {

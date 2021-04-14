@@ -1,14 +1,11 @@
 var Applicant = require('../models/Applicant');
-
-exports.test = function (req, res) {
-    res.send('Greetings from the Test controller!');
-};
+var alert = require('alert');
 
 exports.Applicant_create = function (req, res) {
     
     var applicant = new Applicant(
         {
-            Applicant_Id: req.body.Applicant_Id,
+            Applicant_Id: 0,
             name: req.body.name,
             age: req.body.age
         }
@@ -18,28 +15,30 @@ exports.Applicant_create = function (req, res) {
         if (err) {
             console.log(err);
         }
-        res.send('Applicant Created successfully')
+        alert('Applicant Created successfully');
+        res.redirect("http://localhost:3000/dummy");
     })
 };
 
 exports.Applicant_details = function (req, res) {
-    //console.log(req.params);
-    Applicant.findOne({name: req.params.name}, function (err, applicant) {
+    Applicant.findOne({name: req.params.Applicant_Id}, function (err, applicant) {
         if (err) console.log(err);
         res.send(applicant);
     })
 };
 
 exports.Applicant_update = function (req, res) {
-    Applicant.findOneAndUpdate({name: req.params.name}, {$set: req.body}, function (err, applicant) {
+    Applicant.findOneAndUpdate({name: req.params.Applicant_Id}, {$set: req.body}, function (err, applicant) {
         if (err) console.log(err);
-        res.send('Applicant udpated.');
+        alert('Applicant details updated successfully');
+        res.redirect("http://localhost:3000/dummy");
     });
 };
 
 exports.Applicant_delete = function (req, res) {
-    Applicant.findOneAndDelete({name: req.params.name}, function (err) {
+    Applicant.findOneAndDelete({name: req.params.Applicant_Id}, function (err) {
         if (err) console.log(err);
-        res.send('Deleted successfully!');
+        alert('Applicant Deleted successfully');
+        res.redirect("http://localhost:3000/dummy");
     })
 };
