@@ -36,8 +36,16 @@
 
 .sign:hover{
     border: none;
-    color: rgb(228,130,87);
+    color: rgb(228,130,87) !important;
     background-color: #222;
+}
+.link
+{
+    color: inherit;
+}
+.link:hover{
+    color:inherit;
+    text-decoration: none;
 }
 
 .Footer
@@ -74,7 +82,7 @@
     color: inherit  !important;
 }
 
-hr{
+.footline{
     background-color: rgb(228,130,87);
     width: 70% !important;
     text-align: left;

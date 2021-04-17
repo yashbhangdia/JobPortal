@@ -7,7 +7,12 @@ import {Link} from 'react-router-dom';
 function Footer()
 {
     return(
-        <div>
+        <div className="MyFooter">
+            <div className="preFooter pt-5 pb-3">
+                <h1>Got a Question?</h1>
+                <p>We're here to help. Check out our FAQs, send us an email or call us at <span>1800-200-9899</span></p>
+                <button className="sign"><Link to="/Dashboard" className="link">Sign Up</Link></button>
+            </div>
             <div className="Footer">
                 <div className="row mx-0">
                     <div className="col-md-2 Logo mr-5">
