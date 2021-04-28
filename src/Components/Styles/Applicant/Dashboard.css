@@ -8,7 +8,7 @@
     border-bottom: 1px solid #ddd;
 }
 
-.DashboardHeading h2
+.DashboardHeading h3
 {
     font-weight: 800;
 }
@@ -22,8 +22,18 @@
     border-radius: 6px;
 }
 .dashcard:hover{
-    box-shadow: 0px 0px 20px #ddd;
+    box-shadow: 0px 0px 25px #999;
 }
+
+.dashcard a{
+    color: inherit;
+}
+.dashcard a:hover
+{
+    text-decoration: none;
+    color: inherit;
+}
+
 
 .dashcard h4{
     margin-top: 2rem;
@@ -43,12 +53,11 @@
     border-bottom: 1px solid #ddd;
 }
 
-.dashcard > .icon
+.dashcard > a > .icon
 {
     color:#666;
 }
-
-.dashcard:hover > .icon
+.dashcard:hover > a > .icon
 {
     color: #e9896a;
 }

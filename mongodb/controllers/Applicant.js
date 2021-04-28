@@ -7,7 +7,9 @@ exports.Applicant_create = function (req, res) {
         {
             Applicant_Id: 0,
             name: req.body.name,
-            age: req.body.age
+            password: req.body.password,
+            email: req.body.email,
+            phoneno: req.body.phoneno
         }
     );
     
@@ -15,8 +17,33 @@ exports.Applicant_create = function (req, res) {
         if (err) {
             console.log(err);
         }
-        alert('Applicant Created successfully');
-        res.redirect("http://localhost:3000/dummy");
+        alert('Applicant Created successfully. Please Login to continue');
+        res.redirect("http://localhost:3000/");
+    })
+};
+
+exports.Applicant_login = function (req, res) {
+    Applicant.findOne({name: req.body.name}, function (err, applicant) {
+        if (err) console.log(err);
+        
+        if(applicant)
+        {
+            if(applicant.name == req.body.name && applicant.password == req.body.password)
+            {
+                res.redirect("http://localhost:3000/Dashboard");
+            }
+            else
+            {
+                alert('Wrong Credentials! Please try again.');
+                res.redirect("http://localhost:3000/");
+            }
+        }
+        else
+        {
+            alert('Wrong Credentials! Please try again.');
+            res.redirect("http://localhost:3000/");
+        }
+        
     })
 };
 

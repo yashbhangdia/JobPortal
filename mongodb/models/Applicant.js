@@ -6,7 +6,9 @@ var counterSchema = require('./counter');
 let ApplicantSchema = new Schema({
     Applicant_Id: {type: Number, require:true},
     name: {type: String, required: true, max: 100},
-    age: {type: Number, required: true}
+    password: {type: String, required: true, max: 100},
+    email: {type:String, required:true},
+    phoneno: {type:String}
 });
 
 const Counter = mongoose.model('Counter', counterSchema, "A_Counter");

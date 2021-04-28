@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../Styles/Home/Footer.css';
 import Target from '../Images/Target.png';
 import envelope from '../Images/envelope.gif';
@@ -6,12 +6,18 @@ import {Link} from 'react-router-dom';
 
 function Footer()
 {
+    const [signup, showsignup] = useState(false);
+
+    const toggle = () => {
+        showsignup(true);
+    }
+
     return(
         <div className="MyFooter">
             <div className="preFooter pt-5 pb-3">
                 <h1>Got a Question?</h1>
                 <p>We're here to help. Check out our FAQs, send us an email or call us at <span>1800-200-9899</span></p>
-                <button className="sign"><Link to="/Dashboard" className="link">Sign Up</Link></button>
+                <button className="sign">Sign Up</button>
             </div>
             <div className="Footer">
                 <div className="row mx-0">
