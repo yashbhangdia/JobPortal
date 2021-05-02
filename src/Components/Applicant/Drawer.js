@@ -34,7 +34,7 @@ function DrawerComponent(props)
             <p><IoLocationOutline/> London / England</p>
             </div>
             <Divider/>
-            <SideNav></SideNav>
+            <SideNav logout={props.logout}></SideNav>
         </Drawer.Body>
    </Drawer>
    </div>

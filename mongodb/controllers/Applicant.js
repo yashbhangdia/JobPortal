@@ -1,51 +1,82 @@
 var Applicant = require('../models/Applicant');
-var alert = require('alert');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const keys = require("../config/keys");
 
 exports.Applicant_create = function (req, res) {
-    
-    var applicant = new Applicant(
-        {
-            Applicant_Id: 0,
-            name: req.body.name,
-            password: req.body.password,
-            email: req.body.email,
-            phoneno: req.body.phoneno
-        }
-    );
-    
-    applicant.save(function (err) {
-        if (err) {
-            console.log(err);
-        }
-        alert('Applicant Created successfully. Please Login to continue');
-        res.redirect("http://localhost:3000/");
-    })
-};
-
-exports.Applicant_login = function (req, res) {
-    Applicant.findOne({name: req.body.name}, function (err, applicant) {
-        if (err) console.log(err);
-        
-        if(applicant)
-        {
-            if(applicant.name == req.body.name && applicant.password == req.body.password)
-            {
-                res.redirect("http://localhost:3000/Dashboard");
-            }
-            else
-            {
-                alert('Wrong Credentials! Please try again.');
-                res.redirect("http://localhost:3000/");
-            }
+    Applicant.findOne({ name: req.body.name }).then(applicant => {
+        if (applicant) {
+          return res.status(400).json({ name: "Name already exists" });
         }
         else
         {
-            alert('Wrong Credentials! Please try again.');
-            res.redirect("http://localhost:3000/");
+          const newUser = new Applicant({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            phoneno: req.body.phoneno
+          });
+          //Hash password before saving in database
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) throw err;
+              newUser.password = hash;
+              newUser
+                .save()
+                .then(applicant => res.json(applicant))
+                .catch(err => console.log(err));
+            });
+          });
         }
-        
-    })
+      });
 };
+
+exports.Applicant_login = function (req, res) {
+  
+    const password = req.body.password;
+
+    Applicant.findOne({name: req.body.name}).then(applicant => {
+        // Check if user exists
+        if (!applicant) {
+          return res.status(400).json({ nameNotFound: "Name not found" });
+        }
+
+        bcrypt.compare(password, applicant.password).then(isMatch => {
+            if (isMatch) {
+            // User matched
+            // Create JWT Payload
+                const payload = {
+                    id: applicant.Applicant_Id,
+                    name: applicant.name
+                };
+                jwt.sign(
+                    payload,
+                    keys.secretOrKey,
+                    {
+                        expiresIn: 31556926 // 1 year in seconds
+                    },
+                    (err, token) => {
+                        res
+                        .status(200)
+                        .json({
+                        success: true,
+                        token: "Bearer " + token
+                        });
+                    }
+                );
+                //res.redirect("http://localhost:3000/Dashboard");
+            }
+            else 
+            {
+                return res
+                    .status(400)
+                    .json({ passwordincorrect: "Password incorrect" });
+            }
+                //res.redirect("http://localhost:3000/");
+        });
+    });
+};
+
 
 exports.Applicant_details = function (req, res) {
     Applicant.findOne({name: req.params.Applicant_Id}, function (err, applicant) {
@@ -54,6 +85,7 @@ exports.Applicant_details = function (req, res) {
     })
 };
 
+
 exports.Applicant_update = function (req, res) {
     Applicant.findOneAndUpdate({name: req.params.Applicant_Id}, {$set: req.body}, function (err, applicant) {
         if (err) console.log(err);
@@ -61,6 +93,7 @@ exports.Applicant_update = function (req, res) {
         res.redirect("http://localhost:3000/dummy");
     });
 };
+
 
 exports.Applicant_delete = function (req, res) {
     Applicant.findOneAndDelete({name: req.params.Applicant_Id}, function (err) {

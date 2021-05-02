@@ -8,7 +8,7 @@ import {IoWalletOutline} from 'react-icons/io5';
 
 import '../Styles/Applicant/SideNav.css';
 
-function SideNav()
+function SideNav(props)
 {
     return(
     <div className="widget">
@@ -18,7 +18,7 @@ function SideNav()
             <li><a href="#"><span className="icons"><IoPaperPlaneOutline size={18}/></span>Applied Jobs</a></li>
             <li><a href="#"><span className="icons"><IoWalletOutline size={18}/></span>Recommended Jobs</a></li>
             <li><a href="#"><span className="icons"><IoKeyOutline size={18}/></span>Change Password</a></li>
-            <li><a href="#"><span className="icons"><IoLogOutOutline size={18}/></span>Logout</a></li>
+            <li><a onClick={props.logout}><span className="icons"><IoLogOutOutline size={18}/></span>Logout</a></li>
         </ul>
     </div>
     );

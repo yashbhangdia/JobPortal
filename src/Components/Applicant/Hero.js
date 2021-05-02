@@ -10,16 +10,17 @@ function ResumeHero(props)
         <div className="Brand">
             <h2>DreamJobs</h2>
         </div>
-        <Drawer></Drawer>
+        <Drawer logout={props.logout}></Drawer>
         <Typewriter
             onInit={(typewriter) => {
                 typewriter
-                .typeString('Welcome <span style="color: #e9896a; font-weight: 900;">David</span>')
+                .typeString(`Welcome <span style="color: #e9896a; font-weight: 900;">David</span>`)
                 .pauseFor(2500)
                 .deleteAll()
                 .start();
             }}
             options={{
+                strings: ['Hello', 'World'],
                 loop: true,
                 cursor: "_"
             }}

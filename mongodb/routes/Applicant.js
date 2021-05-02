@@ -1,5 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const keys = require("../config/keys");
+
 
 var Applicant_controller = require('../controllers/Applicant');
 

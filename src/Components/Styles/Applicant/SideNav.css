@@ -24,6 +24,7 @@ li:hover{
 li > a{
     color: inherit !important;
     text-decoration: none !important; 
+    cursor: pointer;
 }
 
 .icons
