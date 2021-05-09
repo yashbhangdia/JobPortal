@@ -4,13 +4,14 @@ const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
 
 exports.Applicant_create = function (req, res) {
-    Applicant.findOne({ name: req.body.name }).then(applicant => {
+    Applicant.findOne({ username: req.body.username }).then(applicant => {
         if (applicant) {
-          return res.status(400).json({ name: "Name already exists" });
+          return res.status(400).json({ name: "Username already exists" });
         }
         else
         {
           const newUser = new Applicant({
+            username: req.body.username,
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
@@ -35,10 +36,10 @@ exports.Applicant_login = function (req, res) {
   
     const password = req.body.password;
 
-    Applicant.findOne({name: req.body.name}).then(applicant => {
+    Applicant.findOne({username: req.body.username}).then(applicant => {
         // Check if user exists
         if (!applicant) {
-          return res.status(400).json({ nameNotFound: "Name not found" });
+          return res.status(400).json({ nameNotFound: "Username not found" });
         }
 
         bcrypt.compare(password, applicant.password).then(isMatch => {
@@ -46,14 +47,17 @@ exports.Applicant_login = function (req, res) {
             // User matched
             // Create JWT Payload
                 const payload = {
-                    id: applicant.Applicant_Id,
-                    name: applicant.name
+                    aid: applicant.Applicant_Id,
+                    username: applicant.username,
+                    name: applicant.name,
+                    email: applicant.email,
+                    phoneno: applicant.phoneno
                 };
                 jwt.sign(
                     payload,
                     keys.secretOrKey,
                     {
-                        expiresIn: 31556926 // 1 year in seconds
+                        expiresIn: 1800 // 1 month in seconds
                     },
                     (err, token) => {
                         res
@@ -68,7 +72,7 @@ exports.Applicant_login = function (req, res) {
             }
             else 
             {
-                return res
+                    return res
                     .status(400)
                     .json({ passwordincorrect: "Password incorrect" });
             }
@@ -79,26 +83,184 @@ exports.Applicant_login = function (req, res) {
 
 
 exports.Applicant_details = function (req, res) {
-    Applicant.findOne({name: req.params.Applicant_Id}, function (err, applicant) {
-        if (err) console.log(err);
-        res.send(applicant);
+    Applicant.findOne({Applicant_Id: req.params.aid}).then((data) => {
+        //console.log('Data: ', data);
+        return res.json(data);
     })
-};
-
-
-exports.Applicant_update = function (req, res) {
-    Applicant.findOneAndUpdate({name: req.params.Applicant_Id}, {$set: req.body}, function (err, applicant) {
-        if (err) console.log(err);
-        alert('Applicant details updated successfully');
-        res.redirect("http://localhost:3000/dummy");
+    .catch((error) => {
+        console.log('error: ', error);
     });
 };
 
 
+
 exports.Applicant_delete = function (req, res) {
-    Applicant.findOneAndDelete({name: req.params.Applicant_Id}, function (err) {
-        if (err) console.log(err);
-        alert('Applicant Deleted successfully');
-        res.redirect("http://localhost:3000/dummy");
-    })
+    if(req.params.field=="edu"){
+        Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull: {"resume.education": {etype: req.body.etype}}}).then((applicant) => {
+            res.redirect("http://localhost:3000/resume");
+        })
+        .catch((error) => {
+            console.log('Applicant Education Details Not Deleted! ', error);
+        });
+    }
+    else if(req.params.field=="exp"){
+            var selector = {};
+            var operator = {};
+            selector["resume.experience."+req.body.expid] = {company:"delete"}; 
+            operator['$set'] = selector;
+                Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
+                    Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"resume.experience": {company: "delete"}}}).then((applicant) => {
+                        res.redirect("http://localhost:3000/resume#experience");
+                    })
+                    .catch((error) => {
+                        console.log('Work Experience Not Deleted! ', error);
+                    });
+                })
+                .catch((error) => {
+                    console.log('Applicant Not found! ', error);
+                });
+    }
+    else if(req.params.field=="proj"){
+        var selector = {};
+        var operator = {};
+        selector["resume.projects."+req.body.pid] = {title:"delete"}; 
+        operator['$set'] = selector;
+            Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
+                Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"resume.projects": {title: "delete"}}}).then((applicant) => {
+                    res.redirect("http://localhost:3000/resume#projects");
+                })
+                .catch((error) => {
+                    console.log('Project Not Deleted! ', error);
+                });
+            })
+            .catch((error) => {
+                console.log('Applicant Not found! ', error);
+            });
+    }
+    else if(req.params.field=="ach"){
+        var selector = {};
+        var operator = {};
+        selector["resume.achievements."+req.body.achid] = {atitle:"delete"}; 
+        operator['$set'] = selector;
+            Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
+                Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"resume.achievements": {atitle: "delete"}}}).then((applicant) => {
+                    res.redirect("http://localhost:3000/resume#projects");
+                })
+                .catch((error) => {
+                    console.log('Achievement Not Deleted! ', error);
+                });
+            })
+            .catch((error) => {
+                console.log('Applicant Not found! ', error);
+            });
+    }
+    else if(req.params.field=="skill"){
+        Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"resume.skills": req.body.skill}}).then((applicant) => {
+                    res.redirect("http://localhost:3000/resume#projects");
+                })
+                .catch((error) => {
+                    console.log('Skill Not Deleted! ', error);
+                });
+    }
 };
+
+exports.Applicant_update = function (req, res) {
+    if(req.params.field=="edu"){
+            Applicant.findOneAndUpdate({$and: [{Applicant_Id: req.params.aid}, {"resume.education.etype": req.body.etype}]}, {$set: {"resume.education.$": req.body}}, {$new: true}).then((applicant) => {
+                //check if edu details exist based on etype -> if exists -> update else push
+                if(applicant){
+                    res.redirect("http://localhost:3000/resume#res");
+                } //update
+                else{
+                    Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push: {"resume.education": req.body}}, function (err, data) {
+                        if (err) console.log(err);
+                        res.redirect("http://localhost:3000/resume#res");
+                    });
+                } //push
+            })
+            .catch((error) => {
+                console.log('Applicant Not found! ', error);
+            });        
+    }
+
+    else if(req.params.field=="exp"){
+        var selector = {};
+        var operator = {};
+        
+            if(req.body.expid == -1) //push
+            {
+                Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push: {"resume.experience": req.body}}, function (err, data) {
+                    if (err) console.log(err);
+                    res.redirect("http://localhost:3000/resume#experience");
+                });
+            }
+            else{ //update
+                
+                selector["resume.experience."+req.body.expid] = req.body;
+                operator['$set'] = selector;
+                Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
+                    //check if edu details exist based on etype -> if exists -> update else push
+                res.redirect("http://localhost:3000/resume#experience");
+                })
+                .catch((error) => {
+                    console.log('Applicant Not found! ', error);
+                });
+            }
+        }   
+        else if(req.params.field=="proj"){
+            var selector = {};
+            var operator = {};
+            if(req.body.pid == -1) //push
+            {
+                Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push: {"resume.projects": req.body}}, function (err, data) {
+                    if (err) console.log(err);
+                    res.redirect("http://localhost:3000/resume#projects");
+                });
+            }
+            else{ //update
+                
+                selector["resume.projects."+req.body.pid] = req.body;
+                operator['$set'] = selector;
+                Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
+                    //check if edu details exist based on etype -> if exists -> update else push
+                res.redirect("http://localhost:3000/resume#projects");
+                })
+                .catch((error) => {
+                    console.log('Applicant Not found! ', error);
+                });
+            }
+        }
+        else if(req.params.field=="ach"){
+            var selector = {};
+            var operator = {};
+                if(req.body.achid == -1) //push
+                {
+                    Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push: {"resume.achievements": req.body}}, function (err, data) {
+                        if (err) console.log(err);
+                        res.redirect("http://localhost:3000/resume#achievements");
+                    });
+                }
+                else{ //update
+                    
+                    selector["resume.achievements."+req.body.achid] = req.body;
+                    operator['$set'] = selector;
+                    Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
+                        //check if edu details exist based on etype -> if exists -> update else push
+                    res.redirect("http://localhost:3000/resume#achievements");
+                    })
+                    .catch((error) => {
+                        console.log('Applicant Not found! ', error);
+                    });
+                }
+            }
+        else if(req.params.field=="skill"){
+            Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push: {"resume.skills": {$each: req.body.skills}}}).then((data) =>{
+                res.redirect("http://localhost:3000/resume#skills");
+            })
+            .catch((error) => {
+                console.log('Applicant Not found! ', error);
+            });
+        }
+        
+};
+

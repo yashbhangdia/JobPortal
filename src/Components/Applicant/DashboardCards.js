@@ -23,7 +23,7 @@ function DashboardCards()
                 </div>
                 
                 <div className="col-lg-6 dashcard t">
-                    <a href="/profile">
+                    <a href="/resume">
                     <IoDocumentTextOutline size={70} className="icon"/>
                     <h4>My Resume</h4>
                     <p>View Resume</p>

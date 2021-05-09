@@ -29,8 +29,8 @@ function Footer()
                         <p>+1 256-22769880</p>
                         <p>info@dreamjob.com</p>
                     </div>
-                    <div className='col-md-3 pt-3'>
-                        <img src={envelope} className="col-md-12"></img>
+                    <div className='col-md-3'>
+                        <img src={envelope} className="col-md-12" alt="gif"></img>
                     </div>
                 </div>
             </div>
