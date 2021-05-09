@@ -12,7 +12,7 @@ import {AiOutlineMail} from 'react-icons/ai';
 import {AiOutlinePhone} from 'react-icons/ai';
 import {IoKeyOutline} from 'react-icons/io5';
 import {AiOutlineUser} from 'react-icons/ai';
-
+import { HiOutlineIdentification } from "react-icons/hi"
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -24,12 +24,13 @@ class Register extends Component{
     constructor() {
         super();
         this.state = {
+          username: "",
           name: "",
           email: "",
           password: "",
           phoneno: "",
           candidate: true,
-          empolyer: false,
+          employer: false,
           errors: {}
         };
 
@@ -51,6 +52,7 @@ class Register extends Component{
     onSubmit = e => {
         e.preventDefault();
         const newUser = {
+          username: this.state.username,
           name: this.state.name,
           email: this.state.email,
           password: this.state.password,
@@ -82,10 +84,16 @@ class Register extends Component{
                 <Button className={"controlbutton " + (this.state.employer ? "selected" : "")} onClick={this.control}>Employer</Button>
                 <Form onSubmit={this.onSubmit} className="pt-4">
                     <div className="cfield">
-                        <Input type="text" name="name" id="name" placeholder="Username" 
-                               onChange={this.onChange} value={this.state.name} error={errors.name} 
+                        <Input type="text" name="username" id="username" placeholder="Username" 
+                               onChange={this.onChange} value={this.state.username} error={errors.username} 
                                pattern="[A-Za-z0-9_]+" title="Username can only contain Alphabets and underscore(_)" required/>
                         <AiOutlineUser className="icon" size={24}/>
+                    </div>
+                    <div className="cfield">
+                        <Input type="text" name="name" id="name" placeholder="Name" 
+                               onChange={this.onChange} value={this.state.name} error={errors.name} 
+                               pattern="[A-Za-z ]+" title="Name can only contain Alphabets" required/>
+                        <HiOutlineIdentification className="icon" size={24}/>
                     </div>
                     <div className="cfield">
                         <Input type="password" name="password" id="password" placeholder="Password" 

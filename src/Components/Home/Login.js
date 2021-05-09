@@ -21,7 +21,7 @@ class Login extends Component{
     constructor() {
         super();
         this.state = {
-          name: "",
+          username: "",
           password: "",
           candidate: true,
           employer: false,
@@ -41,15 +41,16 @@ class Login extends Component{
         if (nextProps.auth.isAuthenticated) {
           this.props.history.push('/Dashboard'); // push user to dashboard when they login
         }
+        // else if(!nextProps.auth.start)
+        // {
+        //    alert("Wrong Credentials");
+        // }
         if (nextProps.errors) {
           this.setState({
             errors: nextProps.errors
           });
         }
-        else
-        {
-          alert("Wrong Credentials");
-        }
+        
       }
 
     onChange = e => {
@@ -59,11 +60,12 @@ class Login extends Component{
     onSubmit = e => {
         e.preventDefault();
         const userData = {
-          name: this.state.name,
+          username: this.state.username,
           password: this.state.password
         };
         console.log(userData);
         this.props.loginUser(userData);
+
     };
 
     control()
@@ -87,7 +89,7 @@ class Login extends Component{
                     <Button className={"controlbutton " + (this.state.employer ? "selected" : "")} onClick={this.control}>Employer</Button>
                     <Form noValidate onSubmit={this.onSubmit} className="pt-4">
                         <div className="cfield">
-                            <Input type="text" name="name" id="name" placeholder="Username" onChange={this.onChange} value={this.state.name} error={errors.email}
+                            <Input type="text" name="username" id="username" placeholder="Username" onChange={this.onChange} value={this.state.name} error={errors.email}
                               pattern="[A-Za-z0-9_]+" required />
                             <AiOutlineUser className="icon" size={24}/>
                         </div>

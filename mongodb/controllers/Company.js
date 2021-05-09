@@ -25,14 +25,14 @@ exports.Company_create = function (req, res) {
 };
 
 exports.Company_details = function (req, res) {
-    Company.findOne({name: req.params.Company_Id}, function (err, company) {
+    Company.findOne({Company_Id: req.params.Company_Id}, function (err, company) {
         if (err) console.log(err);
         res.send(company);
     })
 };
 
 exports.Company_update = function (req, res) {
-    Company.findOneAndUpdate({name: req.params.Company_Id}, {$set: req.body}, function (err, company) {
+    Company.findOneAndUpdate({Company_Id: req.params.Company_Id}, {$set: req.body}, function (err, company) {
         if (err) console.log(err);
         alert('Applicant details updated successfully');
         res.redirect("http://localhost:3000/dummy");
@@ -40,7 +40,7 @@ exports.Company_update = function (req, res) {
 };
 
 exports.Company_delete = function (req, res) {
-   	Company.findOneAndDelete({name: req.params.Company_Id}, function (err) {
+   	Company.findOneAndDelete({Company_Id: req.params.cid}, function (err) {
         if (err) console.log(err);
         alert('Applicant Deleted successfully');
         res.redirect("http://localhost:3000/dummy");

@@ -23,9 +23,10 @@ class Dashboard extends Component
     {
 
     const { user } = this.props.auth;
+    
     return(
         <div>
-            <Hero logout={this.onLogoutClick}/>
+            <Hero logout={this.onLogoutClick} name={user.name}/>
             <div className="row mx-0 mt-5 pb-5">
                 <div className="col-lg-3" style={{borderRight: "1px solid #eee"}}>
                     <SideNav logout={this.onLogoutClick} />

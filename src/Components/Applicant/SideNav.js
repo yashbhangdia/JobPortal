@@ -14,7 +14,7 @@ function SideNav(props)
     <div className="widget">
         <ul>
             <li><a href="#"><span className="icons"><AiOutlineUser size={18}/></span>Profile</a></li>
-            <li><a href="#"><span className="icons"><AiOutlineProfile size={18}/></span>Resume</a></li>
+            <li><a href="/resume"><span className="icons"><AiOutlineProfile size={18}/></span>Resume</a></li>
             <li><a href="#"><span className="icons"><IoPaperPlaneOutline size={18}/></span>Applied Jobs</a></li>
             <li><a href="#"><span className="icons"><IoWalletOutline size={18}/></span>Recommended Jobs</a></li>
             <li><a href="#"><span className="icons"><IoKeyOutline size={18}/></span>Change Password</a></li>

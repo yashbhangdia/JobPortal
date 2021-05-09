@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Home from './Home/Home';
 import Dummy from './Dummy/dummy';
 import Dashboard from './Applicant/Dashboard';
-
+import Resume from './Applicant/Resume';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "../actions/authActions";
@@ -39,7 +39,7 @@ function App(){
 			<Router>
 				<Switch>
 					<Route path="/" component={Home} exact/>
-					<Route path="/dummy" component={Dummy}/>
+					<PrivateRoute path="/resume" component={Resume} exact/>
 					<PrivateRoute path="/Dashboard" component={Dashboard} exact/>
 				</Switch>
 			</Router>

@@ -9,11 +9,10 @@ router.post('/create', Applicant_controller.Applicant_create);
 
 router.post('/login', Applicant_controller.Applicant_login);
 
-router.get('/:Applicant_Id', Applicant_controller.Applicant_details);
+router.get('/:aid', Applicant_controller.Applicant_details);
 
-router.put('/:Applicant_Id/update', Applicant_controller.Applicant_update);
+router.post('/:aid/update/:field', Applicant_controller.Applicant_update);
 
-router.delete('/:Applicant_Id/delete', Applicant_controller.Applicant_delete);
-
+router.delete('/:aid/delete/:field', Applicant_controller.Applicant_delete);
 
 module.exports = router;

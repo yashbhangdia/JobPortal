@@ -39,7 +39,7 @@ export const loginUser = userData => dispatch => {
       }
       else{
         console.log("Wrong credentials");
-        dispatch(setCurrentUser({}));
+        alert("Wrong credentials");
       }
     })
     .catch(err =>

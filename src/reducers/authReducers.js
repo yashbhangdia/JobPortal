@@ -13,7 +13,7 @@ import {
       case SET_CURRENT_USER:
         return {
           ...state,
-          isAuthenticated: !isEmpty(action.payload),
+          isAuthenticated: !isEmpty(action.payload) || !action.payload=='-',
           user: action.payload
         };
       case USER_LOADING:

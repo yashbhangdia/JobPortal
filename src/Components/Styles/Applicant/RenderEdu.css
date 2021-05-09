@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
+
+.details > hr{
+ margin-left: 0%;
+ width: 85%;
+}
+
+.etype{
+	color: #444;
+}
+
+.ins{
+	margin-top: 0.5rem;
+    width: 100%;
+    font-size: 16px;
+	color: #001;
+}
+
+
+
+.major{
+	margin-left:1.25em;
+	color: #666;
+	font-size: 14px;
+}
+
+.details > ul > li {
+	color: #001 !important;
+	margin-top: 0.5rem !important;
+}
+
+.details > ul> li:hover{
+	color: #001 !important;
+}
+
