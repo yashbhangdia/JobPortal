@@ -24,9 +24,8 @@ exports.Applicant_create = function (req, res) {
             currentSalary: "",
             currentCompany: "",
             about: "",
-            image: "https://img.flaticon.com/icons/png/512/149/149071.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF",
+            image: "https://cdn2.vectorstock.com/i/thumb-large/23/81/default-avatar-profile-icon-vector-18942381.jpg",
             address: {city: "", state: "", country: "", pincode: ""},
-            socialMedia: {facebook: "", linkedin: "", twitter: "", github: ""}
           });
           //Hash password before saving in database
           bcrypt.genSalt(10, (err, salt) => {

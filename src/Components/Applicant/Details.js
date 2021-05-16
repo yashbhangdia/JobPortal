@@ -47,6 +47,9 @@ class Details extends Component {
 		  if(this.state.field=="ach" && data.resume.achievements.length){
 			this.setState({isEmpty: false});
 		  }
+		  if(this.state.field=="social" && data.socialMedia){
+			this.setState({isEmpty: false});
+		  }
 		  //console.log('Data has been received!!');
 		})
 		.catch(() => {
@@ -189,7 +192,7 @@ class Details extends Component {
 						</div>
 					</div>
 					}
-					{this.state.isLoaded && !this.state.isEdit && this.state.field=="socialMedia" &&
+					{this.state.isLoaded && !this.state.isEdit && !this.state.isEmpty && this.state.field=="social" &&
 					<ul className="socialMedia">
 						{items.socialMedia.facebook!="" && <li><a href={items.socialMedia.facebook}><FaFacebook style={{color:"#3b5998"}} size={40}/></a></li>}
 						{items.socialMedia.linkedin!="" && <li><a href={items.socialMedia.linkedin}><FaLinkedinIn style={{color:"#0077b5"}} size={40}/></a></li>}

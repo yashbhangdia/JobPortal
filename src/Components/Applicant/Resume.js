@@ -37,7 +37,7 @@ function Resume(props){
 	return ( <div className="viewResume">
 		<div className="header row mx-0"></div>
 		<div className="row mx-0 mt-5 candDetails">
-			<div className="col-md-4 socialMediaLinks"><Details aid={user.aid} field={"socialMedia"} edit={false}/></div>
+			<div className="col-md-4 socialMediaLinks"><Details aid={user.aid} field={"social"} edit={false}/></div>
 			<div className="col-md-4 personalDetails"><Details aid={user.aid} field={"personalDetails"} edit={false}/></div>
 			<div className="col-md-4 contact"><a href="#contact"><span className="r-icons"><SiMinutemailer size={40}/></span> Contact {user.name.split(" ")[0]}</a></div>
 		</div>
