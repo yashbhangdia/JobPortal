@@ -2,7 +2,7 @@ import React from 'react';
 import {HiOutlineBriefcase} from 'react-icons/hi';
 import {AiOutlineUser} from 'react-icons/ai';
 import {IoDocumentTextOutline} from 'react-icons/io5';
-import {RiStackLine} from 'react-icons/ri';
+import {IoBulbOutline} from 'react-icons/io5';
 
 import '../Styles/Applicant/Dashboard.css';
 
@@ -40,10 +40,10 @@ function DashboardCards()
                 </div>
                 
                 <div className="col-lg-6 dashcard">
-                    <a href="/buildResume">
-                    <RiStackLine size={70} className="icon"/>
-                    <h4>My Resume</h4>
-                    <p>Build Resume</p>
+                    <a href="/profile">
+                    <IoBulbOutline size={70} className="icon"/>
+                    <h4>Recommended Jobs</h4>
+                    <p>20 New Jobs</p>
                     </a>
                 </div>
             </div>

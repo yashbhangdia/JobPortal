@@ -40,9 +40,9 @@ function RenderEdu(props){
 					<div className="col-md-9 etype">
 						<h5>{edu.etype}</h5>
 					</div>
-					{props.edit && <div className="col-md-3 r-icons mr-0">
+					<div className="col-md-3 r-icons mr-0">
 						<button onClick={editEdu}><FaEdit size={24}></FaEdit></button><span><button onClick={deleteEdu}><RiDeleteBin5Fill size={24}></RiDeleteBin5Fill></button></span>
-					</div>}	 	 
+					</div>	 	 
 				 </div>
 				<ul>
 					<li>Year of Passing: {edu.yop.split("-")[0]}</li>

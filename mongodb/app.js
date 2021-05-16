@@ -4,7 +4,7 @@ const passport = require("passport");
 
 const Applicant = require('./routes/Applicant'); // Imports routes for the Applicants
 const Company = require('./routes/Company'); // Imports routes for the Companies
-const SMS = require('./routes/sms')
+
 const app = express();
 
 // Set up mongoose connection
@@ -32,7 +32,6 @@ require("./config/passport")(passport);
 
 app.use('/Applicant', Applicant);
 app.use('/Company', Company);
-app.use('/sms', SMS);
 
 let port = 1234;
 

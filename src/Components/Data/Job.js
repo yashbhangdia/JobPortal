@@ -1,7 +1,7 @@
 const jobs=[
 	{
 		id: 1, 
-		logo: "https://dofonline.co.uk/wp-content/uploads/2018/07/Deutsche-Bank-logo.jpg",
+		logo: "http://allvectorlogo.com/img/2017/03/deutsche-bank-logo.png",
 		role: "Data Analyst",
 		company: "Deutsche Bank",
 		loc: "Pune, Maharashtra"
@@ -43,7 +43,7 @@ const jobs=[
 	},
 	{
 		id: 7, 
-		logo: "https://dofonline.co.uk/wp-content/uploads/2018/07/Deutsche-Bank-logo.jpg",
+		logo: "http://allvectorlogo.com/img/2017/03/deutsche-bank-logo.png",
 		role: "Data Analyst",
 		company: "Deutsche Bank",
 		loc: "Pune, Maharashtra"

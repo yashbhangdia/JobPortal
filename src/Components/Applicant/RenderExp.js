@@ -35,14 +35,14 @@ function RenderExp(props){
  			<div className="col-md-11 pl-5 expdetails">
 			 	<i></i>
 				<div className="row pl-5"> 
-					<div className="col-md-9 role">
+					<div className="col-md-9">
 						<h5>{exp.role}<span className="company">{exp.company}</span></h5>
 					</div>
-					{props.edit && <div className="col-md-3 r-icons mr-0">
+					<div className="col-md-3 r-icons mr-0">
 						<button onClick={editEdu}><FaEdit size={24}></FaEdit></button><span><button onClick={deleteEdu}><RiDeleteBin5Fill size={24}></RiDeleteBin5Fill></button></span>
-					</div>}	 	 
+					</div>	 	 
 				 </div>
-				<ul className="col-md-10 pl-5">
+				<ul className="pl-5">
 					<li>{exp.from.split("-")[1]+"/"+exp.from.split("-")[0]} - {exp.to.split("-")[1]+"/"+exp.to.split("-")[0]}</li>
 					<li><p>{exp.workDesc}</p></li>
 				</ul>
