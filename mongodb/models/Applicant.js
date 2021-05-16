@@ -9,7 +9,29 @@ let ApplicantSchema = new Schema({
     name: {type: String, required: true, max: 100},
     password: {type: String, required: true, max: 100},
     email: {type: String, required:true},
+    about: {type: String},
     phoneno: {type:String},
+    dob: {type: Date, default: new Date()},
+    gender: {type: String},
+    qualification: {type: String},
+    experience:{type: String},
+    currentJob: {type: String},
+    currentSalary: {type: String},
+    currentCompany: {type: String},
+    categories: [{type: String, unique:true}],
+    image: {type:String},
+    address: {
+        city: {type: String},
+        state: {type: String},
+        country: {type: String},
+        pincode: {type: String}
+    },
+    socialMedia: {
+        facebook: {type: String},
+        linkedin: {type: String},
+        twitter: {type: String},
+        github: {type: String}
+    },
     resume: {
         education: 
         [{  etype: {type: String, enum: ['University', 'High School', 'School'], default:"", unique:true}, 

@@ -20,7 +20,7 @@ function DrawerComponent(props)
     return(
     <div>
     <button onClick={Toggle} className="draweropen">
-        <h6>{props.username}<span className="ml-3"><FaBars size={24} /></span></h6>
+        <h6>{props.user.username}<span className="ml-3"><FaBars size={24} /></span></h6>
     </button>
     <Drawer size="xs" placement="right" backdrop={true} show={show} onHide={Close} className="MyDrawer">
         <Drawer.Header>
@@ -28,11 +28,11 @@ function DrawerComponent(props)
         </Drawer.Header>
         <Drawer.Body>
             <div className="drawerheader">
-            <img src="https://celeb-heights.com/cache/b/david_beckham_640.jpg" className="imgdrawer"></img>
-            <p style={{color: "#aaa", fontWeight: "bold", fontSize: "25px"}}>{props.name.toUpperCase()}</p>
-            <p style={{color: "#aaa"}}><span style={{color: "#e9896a"}}>Software Engineer </span>at Attract Solutions</p>
+            <img src={props.user.image} className="imgdrawer"></img>
+            <p style={{color: "#aaa", fontWeight: "bold", fontSize: "18px"}}>{props.user.name.toUpperCase()}</p>
+            <p style={{color: "#aaa"}}><span style={{color: "#e9896a"}}>{props.user.Job} </span>at {props.user.Company}</p>
             <p>{props.email}</p>
-            <p><IoLocationOutline/> London / England</p>
+            <p><IoLocationOutline/> {props.user.City}, {props.user.Country}</p>
             </div>
             <Divider/>
             <SideNav logout={props.logout}></SideNav>

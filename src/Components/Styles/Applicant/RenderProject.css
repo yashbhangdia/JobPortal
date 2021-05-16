@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
 
+.projdetails{
+	font-family: 'Quicksand';
+}
+
 .projdetails > hr{
  margin-left: 0%;
  width: 85%;
@@ -8,6 +12,10 @@
 
 .title{
 	color: #444;
+}
+
+.title > h5{
+	font-weight: bold;
 }
 
 .link > a{

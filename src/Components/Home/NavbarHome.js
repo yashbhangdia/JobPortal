@@ -70,9 +70,9 @@ class NavBar extends Component
             <Navbar className={this.state.ColorNavbar ? "navbar active" : "navbar"} dark sticky="top" expand="md">
             <NavbarBrand href="#home">Job Portal</NavbarBrand>
             <Nav className="ml-auto">
-                <NavLink className="navlink" to="#home">Home</NavLink>
-                <NavLink className="navlink" to="#About Us">About us</NavLink>
-                <NavLink className="navlink" to="/Dashboard">Profile</NavLink>
+                <NavLink className="navlink" href="#home">Home</NavLink>
+                <NavLink className="navlink" href="#About Us">About us</NavLink>
+                <NavLink className="navlink" href="/Dashboard">Profile</NavLink>
                 <NavLink className="navlink" onClick={this.loginopen} style={{cursor: "pointer"}}>Sign In</NavLink>
                 <NavLink className="navlink" onClick={this.signupopen} style={{cursor: "pointer"}}>Sign up</NavLink>
             </Nav>

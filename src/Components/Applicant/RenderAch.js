@@ -39,11 +39,11 @@ function RenderAch(props){
 					<div className="col-md-9 atitle">
 						<h5>{ach.aTitle}<span className="link">{ach.aLink!="" && <a href={ach.aLink}><BsLink45Deg size={24}/></a>}</span></h5>
 					</div>
-					<div className="col-md-3 r-icons mr-0">
+					{props.edit && <div className="col-md-3 r-icons mr-0">
 						<button onClick={editEdu}><FaEdit size={24}></FaEdit></button><span><button onClick={deleteEdu}><RiDeleteBin5Fill size={24}></RiDeleteBin5Fill></button></span>
-					</div>	 	 
+					</div>}	 	 
 				 </div>
-				<ul className="pl-5">
+				<ul className="col-md-10 pl-5">
 					<li>by<span className="org">{ach.by}</span><span className="year">({ach.year.split("-")[0]})</span></li>
 					<li><p>{ach.aDesc}</p></li>
 				</ul>
