@@ -15,7 +15,18 @@ exports.Applicant_create = function (req, res) {
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
-            phoneno: req.body.phoneno
+            phoneno: req.body.phoneno,
+            gender: "",
+            dob: new Date(),
+            qualification: "",
+            experience: "",
+            currentJob: "",
+            currentSalary: "",
+            currentCompany: "",
+            about: "",
+            image: "https://img.flaticon.com/icons/png/512/149/149071.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF",
+            address: {city: "", state: "", country: "", pincode: ""},
+            socialMedia: {facebook: "", linkedin: "", twitter: "", github: ""}
           });
           //Hash password before saving in database
           bcrypt.genSalt(10, (err, salt) => {
@@ -51,7 +62,12 @@ exports.Applicant_login = function (req, res) {
                     username: applicant.username,
                     name: applicant.name,
                     email: applicant.email,
-                    phoneno: applicant.phoneno
+                    phoneno: applicant.phoneno,
+                    image: applicant.image,
+                    Job: applicant.currentJob,
+                    Company: applicant.currentCompany,
+                    City: applicant.address.city,
+                    Country: applicant.address.country
                 };
                 jwt.sign(
                     payload,
@@ -97,7 +113,7 @@ exports.Applicant_details = function (req, res) {
 exports.Applicant_delete = function (req, res) {
     if(req.params.field=="edu"){
         Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull: {"resume.education": {etype: req.body.etype}}}).then((applicant) => {
-            res.redirect("http://localhost:3000/resume");
+            res.redirect("http://localhost:3000/buildResume");
         })
         .catch((error) => {
             console.log('Applicant Education Details Not Deleted! ', error);
@@ -110,7 +126,7 @@ exports.Applicant_delete = function (req, res) {
             operator['$set'] = selector;
                 Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
                     Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"resume.experience": {company: "delete"}}}).then((applicant) => {
-                        res.redirect("http://localhost:3000/resume#experience");
+                        res.redirect("http://localhost:3000/buildResume#experience");
                     })
                     .catch((error) => {
                         console.log('Work Experience Not Deleted! ', error);
@@ -127,7 +143,7 @@ exports.Applicant_delete = function (req, res) {
         operator['$set'] = selector;
             Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
                 Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"resume.projects": {title: "delete"}}}).then((applicant) => {
-                    res.redirect("http://localhost:3000/resume#projects");
+                    res.redirect("http://localhost:3000/buildResume#projects");
                 })
                 .catch((error) => {
                     console.log('Project Not Deleted! ', error);
@@ -144,7 +160,7 @@ exports.Applicant_delete = function (req, res) {
         operator['$set'] = selector;
             Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
                 Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"resume.achievements": {atitle: "delete"}}}).then((applicant) => {
-                    res.redirect("http://localhost:3000/resume#projects");
+                    res.redirect("http://localhost:3000/buildRresume#projects");
                 })
                 .catch((error) => {
                     console.log('Achievement Not Deleted! ', error);
@@ -156,7 +172,7 @@ exports.Applicant_delete = function (req, res) {
     }
     else if(req.params.field=="skill"){
         Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"resume.skills": req.body.skill}}).then((applicant) => {
-                    res.redirect("http://localhost:3000/resume#projects");
+                    res.redirect("http://localhost:3000/buildResume#projects");
                 })
                 .catch((error) => {
                     console.log('Skill Not Deleted! ', error);
@@ -165,16 +181,38 @@ exports.Applicant_delete = function (req, res) {
 };
 
 exports.Applicant_update = function (req, res) {
+    if(req.params.field=="personal"){
+        Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, req.body, {$new: true}).then((applicant) => {
+            if(applicant){
+                res.redirect("http://localhost:3000/profile#personal");
+            } //update
+        })
+        .catch((error) => {
+            console.log('Applicant Not found! ', error);
+        });
+    }
+    if(req.params.field=="categories")
+    {
+        Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$set: {"categories": req.body.categories}}, {$new: true}).then((applicant) =>{
+                if(applicant)
+                {
+                    return res.json(applicant);
+                }
+            })
+            .catch((error) => {
+                console.log('Applicant Not found! ', error);
+            });
+    }
     if(req.params.field=="edu"){
             Applicant.findOneAndUpdate({$and: [{Applicant_Id: req.params.aid}, {"resume.education.etype": req.body.etype}]}, {$set: {"resume.education.$": req.body}}, {$new: true}).then((applicant) => {
                 //check if edu details exist based on etype -> if exists -> update else push
                 if(applicant){
-                    res.redirect("http://localhost:3000/resume#res");
+                    res.redirect("http://localhost:3000/buildResume#res");
                 } //update
                 else{
                     Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push: {"resume.education": req.body}}, function (err, data) {
                         if (err) console.log(err);
-                        res.redirect("http://localhost:3000/resume#res");
+                        res.redirect("http://localhost:3000/buildResume#res");
                     });
                 } //push
             })
@@ -191,7 +229,7 @@ exports.Applicant_update = function (req, res) {
             {
                 Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push: {"resume.experience": req.body}}, function (err, data) {
                     if (err) console.log(err);
-                    res.redirect("http://localhost:3000/resume#experience");
+                    res.redirect("http://localhost:3000/buildResume#experience");
                 });
             }
             else{ //update
@@ -200,7 +238,7 @@ exports.Applicant_update = function (req, res) {
                 operator['$set'] = selector;
                 Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
                     //check if edu details exist based on etype -> if exists -> update else push
-                res.redirect("http://localhost:3000/resume#experience");
+                res.redirect("http://localhost:3000/buildResume#experience");
                 })
                 .catch((error) => {
                     console.log('Applicant Not found! ', error);
@@ -214,7 +252,7 @@ exports.Applicant_update = function (req, res) {
             {
                 Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push: {"resume.projects": req.body}}, function (err, data) {
                     if (err) console.log(err);
-                    res.redirect("http://localhost:3000/resume#projects");
+                    res.redirect("http://localhost:3000/buildResume#projects");
                 });
             }
             else{ //update
@@ -223,7 +261,7 @@ exports.Applicant_update = function (req, res) {
                 operator['$set'] = selector;
                 Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
                     //check if edu details exist based on etype -> if exists -> update else push
-                res.redirect("http://localhost:3000/resume#projects");
+                res.redirect("http://localhost:3000/buildResume#projects");
                 })
                 .catch((error) => {
                     console.log('Applicant Not found! ', error);
@@ -237,7 +275,7 @@ exports.Applicant_update = function (req, res) {
                 {
                     Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push: {"resume.achievements": req.body}}, function (err, data) {
                         if (err) console.log(err);
-                        res.redirect("http://localhost:3000/resume#achievements");
+                        res.redirect("http://localhost:3000/buildResume#achievements");
                     });
                 }
                 else{ //update
@@ -246,7 +284,7 @@ exports.Applicant_update = function (req, res) {
                     operator['$set'] = selector;
                     Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
                         //check if edu details exist based on etype -> if exists -> update else push
-                    res.redirect("http://localhost:3000/resume#achievements");
+                    res.redirect("http://localhost:3000/buildResume#achievements");
                     })
                     .catch((error) => {
                         console.log('Applicant Not found! ', error);
@@ -255,7 +293,7 @@ exports.Applicant_update = function (req, res) {
             }
         else if(req.params.field=="skill"){
             Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push: {"resume.skills": {$each: req.body.skills}}}).then((data) =>{
-                res.redirect("http://localhost:3000/resume#skills");
+                res.redirect("http://localhost:3000/buildResume#skills");
             })
             .catch((error) => {
                 console.log('Applicant Not found! ', error);
