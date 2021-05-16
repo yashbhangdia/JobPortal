@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
 
-.expdetails{
-    font-family: 'Quicksand';
+
+.company{
+    margin-left: 1.25rem;
+    color: #e9896a;
+    font-size: 16px;
+    font-style: italic;
 }
 
-
-.expdetails::before {
+ .expdetails::before {
     position: absolute;
     left: 7px;
     top: 20px;
@@ -31,29 +34,17 @@
     border-radius: 50%;
 }
 
-.role > h5{
-    font-weight: bold;
-}
-
-.company{
-    margin-left: 1.25rem;
-    color: #e9896a;
-    font-size: 16px;
-    font-style: italic;
-    font-weight: bold;
-}
-
 .workDesc{
 	color: #666;
 	font-size: 16px;
 }
 
 .expdetails > ul > li {
-	color: #000 !important;
+	color: #001 !important;
 	margin-top: 1rem !important;
 }
 
 .expdetails > ul> li:hover{
-	color: #000 !important;
+	color: #001 !important;
 }
 
