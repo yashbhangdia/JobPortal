@@ -8,11 +8,13 @@ import RenderProj from './RenderProj';
 import RenderAch from './RenderAch';
 import RenderSkills from './RenderSkills';
 import SkillsForm from './SkillsForm';
-import {IoLocationOutline} from 'react-icons/io5';
-import {FaUserGraduate, FaFacebook, FaLinkedinIn, FaTwitter, FaGithub, FaBirthdayCake, FaBusinessTime} from 'react-icons/fa';
-import {GiMoneyStack, GiFemale, GiMale} from 'react-icons/gi';
-
-
+import RenderPersonal from './RenderPersonal';
+import RenderCategories from './RenderCategories';
+import RenderContact from './RenderContact';
+import RenderSocial from './RenderSocial';
+import {FaBirthdayCake, FaBusinessTime, FaFacebook, FaLinkedinIn, FaTwitter, FaUserGraduate, FaGithub} from 'react-icons/fa';
+import {IoLocationOutline} from 'react-icons/io';
+import {GiMale, GiFemale, GiMoneyStack} from 'react-icons/gi';
 
 class Details extends Component {
 	
@@ -20,8 +22,7 @@ class Details extends Component {
 		items: {},
 		isLoaded: false,
 		isEmpty: true,
-		field: this.props.field,
-		isEdit: this.props.edit
+		field: this.props.field
 	};
 
 	componentDidMount() {
@@ -30,7 +31,28 @@ class Details extends Component {
 		  const data = response.data;
 		  //console.log(data);
 		  this.setState({ items: data, isLoaded: true});
-		  //console.log("fine1");
+		  console.log("fine1");
+		  if(this.state.field=="personal" && Object.keys(data).length){
+			this.setState({isEmpty: false});
+		  }
+		  if(this.state.field=="categories" && data.categories.length)
+		  {
+			  this.setState({isEmpty: false});
+		  }
+		  if(this.state.field=="contact")
+		  {
+			  if(Object.keys(data.address).length)
+			  {
+				if(data.address.city && data.address.country && data.address.state && data.address.pincode)
+				{
+					this.setState({isEmpty: false});
+				}
+			  }
+		  }
+		  if(this.state.field=="social" && data.socialMedia)
+		  {
+			this.setState({isEmpty: false});
+		  }
 		  if(this.state.field=="edu" && data.resume.education.length){
 			this.setState({isEmpty: false});
 		  }
@@ -38,9 +60,6 @@ class Details extends Component {
 		  {
 			this.setState({isEmpty: false});
 		  }
-		  if(this.state.field=="skill" && data.resume.skills.length){
-			this.setState({isEmpty: false});
-		  } 
 		  if(this.state.field=="proj" && data.resume.projects.length){
 			this.setState({isEmpty: false});
 		  } 
@@ -50,6 +69,9 @@ class Details extends Component {
 		  if(this.state.field=="social" && data.socialMedia){
 			this.setState({isEmpty: false});
 		  }
+		  if(this.state.field=="skill" && data.resume.skills.length){
+			this.setState({isEmpty: false});
+		  } 
 		  //console.log('Data has been received!!');
 		})
 		.catch(() => {
@@ -59,71 +81,60 @@ class Details extends Component {
 
 
 	render() {
-	  const items = this.state.items; 
-		return (<div>			
+	  const items = this.state.items;
+		return (<div>
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="personal" &&
+						<div>
+						<RenderPersonal personal={items} aid={this.props.aid}></RenderPersonal>
+					</div>}
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="categories" &&
+						<div>
+						<RenderCategories empty={false} categories={items.categories} aid={this.props.aid}></RenderCategories>
+					</div>}
+					{this.state.isEmpty && this.state.field=="categories" && <div>
+						<RenderCategories empty={true} categories={items.categories} aid={this.props.aid}></RenderCategories>
+					</div>}
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="contact" &&
+						<div>
+						<RenderContact empty={false} contact={items} aid={this.props.aid}></RenderContact>
+					</div>}
+					{this.state.isEmpty && this.state.field=="contact" && <div>
+						<RenderContact empty={true} contact={items} aid={this.props.aid}></RenderContact>
+					</div>}
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="social" &&
+						<div>
+						<RenderSocial empty={false} social={items.socialMedia} aid={this.props.aid}></RenderSocial>
+					</div>}
+					{this.state.isEmpty && this.state.field=="social" && <div>
+						<RenderSocial empty={true} social={items} aid={this.props.aid}></RenderSocial>
+					</div>}
+					
+					
 					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="edu" &&
 						<div>
-							{!this.state.isEdit && 
-							<div>
-								<div className="row mt-5 pl-5 field">
-									<h3>Education</h3>
-								</div>
-								<div className="row view"><hr></hr></div>
-							</div>}
-							{items.resume.education.map((edu) => {
-								return(<div><RenderEdu edu={edu} aid={this.props.aid} edit={this.state.isEdit}></RenderEdu></div>)
-							})}
-						</div>
-					}
-					{this.state.isEmpty && this.state.isEdit && this.state.field=="edu" && <EducationForm aid={this.props.aid} update={false}/>}
-					
+						{items.resume.education.map((edu) => {
+							return(<div><RenderEdu edu={edu} aid={this.props.aid}></RenderEdu></div>)
+						})}
+					</div>}
+					{this.state.isEmpty && this.state.field=="edu" && <EducationForm aid={this.props.aid} update={false}/>}
 					{/* since experience is optional, if there's no data, no need to display form */}
-					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="exp" && 
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="exp" &&
 						<div>
-							{!this.state.isEdit && 
-							<div>
-								<div className="row mt-5 pl-5 field">
-									<h3>Work Experience</h3>
-								</div>
-								<div className="row view"><hr></hr></div>
-							</div>}
-							{items.resume.experience.map((exp, ind) => {
-								return(<div><RenderExp exp={exp} aid={this.props.aid} expid={ind} edit={this.state.isEdit}></RenderExp></div>)
-							})}
-						</div>
+						{items.resume.experience.map((exp, ind) => {
+							return(<div><RenderExp exp={exp} aid={this.props.aid} expid={ind}></RenderExp></div>)
+						})}
+					</div>}
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="skill" &&
+						<RenderSkills data={items.resume.skills} aid={this.props.aid}/>
 					}
-					
-					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="skill" && 
-						<div>
-							{!this.state.isEdit && <div>
-								<div className="row mt-5 pl-2 field">
-									<h3>Skills</h3>
-								</div>
-								<div className="row view"><hr></hr></div>
-							</div>}
-							<div className="row mx-0 field"> 
-								<RenderSkills data={items.resume.skills} aid={this.props.aid} edit={this.state.isEdit}/>
-							</div>
-						</div>
-					}
-					{this.state.isEmpty && this.state.isEdit && this.state.field=="skill" && <SkillsForm aid={this.props.aid} />}
-					
+					{this.state.isEmpty && this.state.field=="skill" && <SkillsForm aid={this.props.aid} />}
 					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="proj" &&
 						<div>
-							{!this.state.isEdit && <div>
-								<div className="row mt-5 pl-5 field">
-									<h3>Portfolio</h3>
-								</div>
-								<div className="row view"><hr></hr></div>
-							</div>}
-							{items.resume.projects.map((proj, ind) => {
-								return(<div><RenderProj proj={proj} aid={this.props.aid} pid={ind} edit={this.state.isEdit}/></div>)
-								})
-							}
-						</div>
-					}
-					{this.state.isEmpty && this.state.isEdit && this.state.field=="proj" && <ProjectForm aid={this.props.aid} update={false}/>}
-					
+						{items.resume.projects.map((proj, ind) => {
+							return(<div><RenderProj proj={proj} aid={this.props.aid} pid={ind} /></div>)
+						})}
+					</div>}
+					{this.state.isEmpty && this.state.field=="proj" && <ProjectForm aid={this.props.aid} update={false}/>}
 					{/* since achievements are optional, if there's no data, no need to display form */}
 					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="ach" &&
 						<div>
@@ -200,7 +211,10 @@ class Details extends Component {
 						{items.socialMedia.github!="" && <li><a href={items.socialMedia.github}><FaGithub style={{color:"#333"}} size={40}/></a></li>}
 					</ul>
 					}
-				</div>
+						{items.resume.achievements.map((ach, ind) => {
+							return(<div><RenderAch ach={ach} aid={this.props.aid} achid={ind} /></div>)
+						})}
+					</div>
 		);
    }
 }

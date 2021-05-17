@@ -4,12 +4,15 @@ import Target from '../Images/Target.png';
 import envelope from '../Images/envelope.gif';
 import {Link} from 'react-router-dom';
 
+import Register from './Register';
+import Login from './Login';
+
 function Footer()
 {
     const [signup, showsignup] = useState(false);
 
-    const toggle = () => {
-        showsignup(true);
+    const toggleSignup = e => {
+        showsignup(!signup);
     }
 
     return(
@@ -17,7 +20,8 @@ function Footer()
             <div className="preFooter pt-5 pb-3">
                 <h1>Got a Question?</h1>
                 <p>We're here to help. Check out our FAQs, send us an email or call us at <span>1800-200-9899</span></p>
-                <button className="sign">Sign Up</button>
+                <button className="sign" onClick={toggleSignup}>Sign Up</button>
+                {signup && <Register open={toggleSignup} close={toggleSignup} signup={signup}/>}
             </div>
             <div className="Footer">
                 <div className="row mx-0">
