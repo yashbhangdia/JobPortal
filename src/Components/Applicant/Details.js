@@ -12,6 +12,9 @@ import RenderPersonal from './RenderPersonal';
 import RenderCategories from './RenderCategories';
 import RenderContact from './RenderContact';
 import RenderSocial from './RenderSocial';
+import {FaBirthdayCake, FaBusinessTime, FaFacebook, FaLinkedinIn, FaTwitter, FaUserGraduate, FaGithub} from 'react-icons/fa';
+import {IoLocationOutline} from 'react-icons/io';
+import {GiMale, GiFemale, GiMoneyStack} from 'react-icons/gi';
 
 class Details extends Component {
 	
@@ -61,6 +64,9 @@ class Details extends Component {
 			this.setState({isEmpty: false});
 		  } 
 		  if(this.state.field=="ach" && data.resume.achievements.length){
+			this.setState({isEmpty: false});
+		  }
+		  if(this.state.field=="social" && data.socialMedia){
 			this.setState({isEmpty: false});
 		  }
 		  if(this.state.field=="skill" && data.resume.skills.length){
@@ -132,11 +138,83 @@ class Details extends Component {
 					{/* since achievements are optional, if there's no data, no need to display form */}
 					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="ach" &&
 						<div>
+							{!this.state.isEdit && <div>
+								<div className="row mt-5 pl-5 field">
+									<h3>Achievements</h3>
+								</div>
+								<div className="row view"><hr></hr></div>
+							</div>}
+							{items.resume.achievements.map((ach, ind) => {
+								return(<div><RenderAch ach={ach} aid={this.props.aid} achid={ind} edit={this.state.isEdit}/></div>)
+							})}
+						</div>
+					}
+					{this.state.isLoaded && !this.state.isEdit && this.state.field=="about" &&
+					<div>
+						<div className="row mt-5 pl-5 pt-2 field">
+							<h3>About Me</h3>
+						</div>
+						<div className="row view"><hr></hr></div>
+						<div className="col-md-10 about"><p>{items.about}</p></div>
+					</div>
+					}
+					{this.state.isLoaded && !this.state.isEdit && this.state.field=="personalDetails" &&
+					<div>
+							<ul className="view candname">
+								<img className="profileImg" src={items.image}/>
+								<h4>{items.name}</h4>
+								<li className="currentJob">{items.currentJob} <span className="currentCompany">at {items.currentCompany}</span></li>
+								<li>{items.email}</li>
+								<li><span className="r-icons dob"><FaBirthdayCake size={20}/></span>{items.dob.split("T")[0]}</li>
+								<li><span className="r-icons address"><IoLocationOutline size={20}/></span>{items.address.city}, {items.address.state}, {items.address.country}</li>
+							</ul>
+					</div>
+					}
+					{this.state.isLoaded && !this.state.isEdit && this.state.field=="overview" &&
+					<div>
+						<div className="row mt-5 pt-2 mr-0 field">
+							<h4>Job Overview</h4>
+						</div>
+						<div className="row overview">
+							<ul>
+								{items.gender!="" && <li><span className="r-icons">
+									{items.gender=="Male" && <GiMale size={20}/>}
+									{items.gender=="Female" && <GiFemale size={20}/>}
+									</span>
+									Gender<span className="overview_value">{items.gender}</span>
+								</li>} 
+								{items.experience!="" && <li>
+									<span className="r-icons"><FaBusinessTime size={20}/>
+									</span>
+									Experience<span className="overview_value">{items.experience}</span>
+								</li>}
+								{items.qualification!="" && <li>
+									<span className="r-icons"><FaUserGraduate size={20}/>
+									</span>
+									Qualification<span className="overview_value">{items.qualification}</span>
+								</li>}
+								{items.currentSalary!="" && <li>
+									<span className="r-icons"><GiMoneyStack size={24}/>
+									</span>
+									Salary<span className="overview_value">{items.currentSalary}</span>
+								</li>}
+							</ul>
+							
+						</div>
+					</div>
+					}
+					{this.state.isLoaded && !this.state.isEdit && !this.state.isEmpty && this.state.field=="social" &&
+					<ul className="socialMedia">
+						{items.socialMedia.facebook!="" && <li><a href={items.socialMedia.facebook}><FaFacebook style={{color:"#3b5998"}} size={40}/></a></li>}
+						{items.socialMedia.linkedin!="" && <li><a href={items.socialMedia.linkedin}><FaLinkedinIn style={{color:"#0077b5"}} size={40}/></a></li>}
+						{items.socialMedia.twitter!="" && <li><a href={items.socialMedia.twitter}><FaTwitter style={{color:"#00acee"}} size={40}/></a></li>}
+						{items.socialMedia.github!="" && <li><a href={items.socialMedia.github}><FaGithub style={{color:"#333"}} size={40}/></a></li>}
+					</ul>
+					}
 						{items.resume.achievements.map((ach, ind) => {
 							return(<div><RenderAch ach={ach} aid={this.props.aid} achid={ind} /></div>)
 						})}
-					</div>}
-				</div>
+					</div>
 		);
    }
 }
