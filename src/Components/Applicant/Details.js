@@ -113,32 +113,69 @@ class Details extends Component {
 						<RenderSocial empty={true} social={items} aid={this.props.aid}></RenderSocial>
 					</div>}
 					
-					
 					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="edu" &&
 						<div>
-						{items.resume.education.map((edu) => {
-							return(<div><RenderEdu edu={edu} aid={this.props.aid}></RenderEdu></div>)
-						})}
-					</div>}
-					{this.state.isEmpty && this.state.field=="edu" && <EducationForm aid={this.props.aid} update={false}/>}
-					{/* since experience is optional, if there's no data, no need to display form */}
-					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="exp" &&
-						<div>
-						{items.resume.experience.map((exp, ind) => {
-							return(<div><RenderExp exp={exp} aid={this.props.aid} expid={ind}></RenderExp></div>)
-						})}
-					</div>}
-					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="skill" &&
-						<RenderSkills data={items.resume.skills} aid={this.props.aid}/>
+							{!this.state.isEdit && 
+							<div>
+								<div className="row mt-5 pl-5 field">
+									<h3>Education</h3>
+								</div>
+								<div className="row view"><hr></hr></div>
+							</div>}
+							{items.resume.education.map((edu) => {
+								return(<div><RenderEdu edu={edu} aid={this.props.aid} edit={this.state.isEdit}></RenderEdu></div>)
+							})}
+						</div>
 					}
-					{this.state.isEmpty && this.state.field=="skill" && <SkillsForm aid={this.props.aid} />}
+					{this.state.isEmpty && this.state.isEdit && this.state.field=="edu" && <EducationForm aid={this.props.aid} update={false}/>}
+					
+					{/* since experience is optional, if there's no data, no need to display form */}
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="exp" && 
+						<div>
+							{!this.state.isEdit && 
+							<div>
+								<div className="row mt-5 pl-5 field">
+									<h3>Work Experience</h3>
+								</div>
+								<div className="row view"><hr></hr></div>
+							</div>}
+							{items.resume.experience.map((exp, ind) => {
+								return(<div><RenderExp exp={exp} aid={this.props.aid} expid={ind} edit={this.state.isEdit}></RenderExp></div>)
+							})}
+						</div>
+					}
+					
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="skill" && 
+						<div>
+							{!this.state.isEdit && <div>
+								<div className="row mt-5 pl-2 field">
+									<h3>Skills</h3>
+								</div>
+								<div className="row view"><hr></hr></div>
+							</div>}
+							<div className="row mx-0 field"> 
+								<RenderSkills data={items.resume.skills} aid={this.props.aid} edit={this.state.isEdit}/>
+							</div>
+						</div>
+					}
+					{this.state.isEmpty && this.state.isEdit && this.state.field=="skill" && <SkillsForm aid={this.props.aid} />}
+					
 					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="proj" &&
 						<div>
-						{items.resume.projects.map((proj, ind) => {
-							return(<div><RenderProj proj={proj} aid={this.props.aid} pid={ind} /></div>)
-						})}
-					</div>}
-					{this.state.isEmpty && this.state.field=="proj" && <ProjectForm aid={this.props.aid} update={false}/>}
+							{!this.state.isEdit && <div>
+								<div className="row mt-5 pl-5 field">
+									<h3>Portfolio</h3>
+								</div>
+								<div className="row view"><hr></hr></div>
+							</div>}
+							{items.resume.projects.map((proj, ind) => {
+								return(<div><RenderProj proj={proj} aid={this.props.aid} pid={ind} edit={this.state.isEdit}/></div>)
+								})
+							}
+						</div>
+					}
+					{this.state.isEmpty && this.state.isEdit && this.state.field=="proj" && <ProjectForm aid={this.props.aid} update={false}/>}
+					
 					{/* since achievements are optional, if there's no data, no need to display form */}
 					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="ach" &&
 						<div>
@@ -207,7 +244,7 @@ class Details extends Component {
 						</div>
 					</div>
 					}
-					{this.state.isLoaded && !this.state.isEdit && !this.state.isEmpty && this.state.field=="socialIcons" &&
+					{this.state.isLoaded && !this.state.isEdit && this.state.field=="socialMedia" &&
 					<ul className="socialMedia">
 						{items.socialMedia.facebook!="" && <li><a href={items.socialMedia.facebook}><FaFacebook style={{color:"#3b5998"}} size={40}/></a></li>}
 						{items.socialMedia.linkedin!="" && <li><a href={items.socialMedia.linkedin}><FaLinkedinIn style={{color:"#0077b5"}} size={40}/></a></li>}
