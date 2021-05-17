@@ -43,9 +43,9 @@ function RenderProject(props){
 								<h5>{proj.title}<span className="link">{proj.projLink!="" && <a href={proj.projLink}><BsLink45Deg size={24}/></a>}</span></h5>
 							</div>
 							<div className="col-md-1"></div>
-							<div className="col-md-3 r-icons mr-0">
+							{props.edit && <div className="col-md-3 r-icons mr-0">
 								<button onClick={editEdu}><FaEdit size={24}></FaEdit></button><span><button onClick={deleteEdu}><RiDeleteBin5Fill size={24}></RiDeleteBin5Fill></button></span>
-							</div>	 	 
+							</div>}	 	 
 				 		</div>
 						<div className="row">
 				 			<div className="col-md-8 desc">

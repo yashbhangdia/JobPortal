@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vonage/server-sdk": "^2.10.8",
     "alert": "^5.0.10",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -21,10 +22,12 @@
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.6",
-    "multer": "^1.4.2",
+    "nexmo": "^2.9.1",
+    "nodemailer": "^6.6.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "sift": "^13.5.3",
+    "multer": "^1.4.2",
     "validator": "^13.6.0"
   },
   "devDependencies": {

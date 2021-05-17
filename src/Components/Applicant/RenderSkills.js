@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     listStyle: 'none',
     padding: theme.spacing(0.5),
-    margin: 0,
+    margin: 0
   },
   chip: {
     margin: theme.spacing(0.5),
@@ -47,12 +47,18 @@ export default function ChipsArray(props) {
 
         return (
           <li key={ind}>
+            { props.edit && 
             <Chip
               icon={icon}
               label={skill}
               onDelete={handleDelete(skill)}
               className={classes.chip}
-            />
+            /> }
+            {!props.edit && 
+            <Chip
+              label={skill}
+              className={classes.chip}
+            />}
           </li>
         );
       })}
