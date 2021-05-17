@@ -9,7 +9,7 @@ import ProjectForm from './ProjectForm';
 import AchievementForm from './AchievementForm';
 import Skills from './SkillsForm';
 import Details from './Details';
-import "../Styles/Applicant/Resume.css";
+import "../Styles/Applicant/BuildResume.css";
 import {AiOutlineProfile, AiOutlineTrophy} from 'react-icons/ai';
 import {IoIosAddCircle} from 'react-icons/io';
 import {CgWorkAlt} from 'react-icons/cg';
@@ -19,7 +19,7 @@ import { connect } from "react-redux";
 
 
 
-function Resume(props){
+function BuildResume(props){
 	const onLogoutClick = e => {
         e.preventDefault();
         props.logoutUser();
@@ -155,4 +155,4 @@ export default
 connect(
 	mapStateToProps,
 	{ logoutUser }
-)(Resume);
+)(BuildResume);

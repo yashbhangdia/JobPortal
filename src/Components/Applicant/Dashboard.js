@@ -4,6 +4,7 @@ import SideNav from './SideNav';
 import DashboardCards from './DashboardCards';
 import Footer from '../Home/Footer';
 import CircularProgress from './CircularProgress';
+import RecentJobs from '../Home/RecentJobs';
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -11,9 +12,7 @@ import { logoutUser } from "../../actions/authActions";
 
 
 class Dashboard extends Component
-{
-    // const [logout, onLogoutClick] = useState(false);
-    
+{   
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
@@ -36,6 +35,7 @@ class Dashboard extends Component
                     <DashboardCards/>
                 </div>
             </div>
+            <RecentJobs auth={true}/>
             <Footer/>
         </div>
     );

@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Styles/Home/Jobs.css';
 
+import Register from './Register';
+import Login from './Login';
 
-function jobs(props){
+function Jobs(props){
+
+	const [signup, showsignup] = useState(false);
+	const [Apply, showApply] = useState(false);
+
+	const toggleSignup = e => {
+		showsignup(!signup);
+	}
+
+	const toggleApply = e => {
+		showApply(!signup);
+	}
+
 	return(
 		<div className="col-md-12">
 			<div className="Job">
@@ -19,7 +33,9 @@ function jobs(props){
 				<div className="row mx-0">
 					<div className="col-md-12">
 					<span className="Loc">{props.loc}</span>
-					<a className="Apply" href="#" >APPLY NOW</a>
+					<a className="Apply" onClick={props.auth ? toggleApply : toggleSignup} style={{'cursor':"pointer"}} >APPLY NOW</a>
+					{signup && <Register open={toggleSignup} close={toggleSignup} signup={signup}/>}
+					{/* {Apply && <confirmApply />} */}
 					</div>
 				</div>
 				
@@ -28,4 +44,4 @@ function jobs(props){
 	);
 }
 
-export default jobs;
+export default Jobs;

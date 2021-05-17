@@ -21,7 +21,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(cors({
-	origin: "http://localhost:3000",
+	origin: ["http://localhost:3000", "http://localhost:3000/profile"]
 }));
 
 app.use(express.urlencoded({extended: true}));
@@ -29,6 +29,8 @@ app.use(express.json());
 
 app.use(passport.initialize());
 require("./config/passport")(passport);
+
+app.use('/public', express.static('public'));
 
 app.use('/Applicant', Applicant);
 app.use('/Company', Company);

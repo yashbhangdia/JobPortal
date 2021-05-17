@@ -8,8 +8,12 @@ import RenderProj from './RenderProj';
 import RenderAch from './RenderAch';
 import RenderSkills from './RenderSkills';
 import SkillsForm from './SkillsForm';
+import RenderPersonal from './RenderPersonal';
+import RenderCategories from './RenderCategories';
+import RenderContact from './RenderContact';
+import RenderSocial from './RenderSocial';
 
-class EduDetails extends Component {
+class Details extends Component {
 	
 	state = {
 		items: {},
@@ -25,6 +29,27 @@ class EduDetails extends Component {
 		  //console.log(data);
 		  this.setState({ items: data, isLoaded: true});
 		  console.log("fine1");
+		  if(this.state.field=="personal" && Object.keys(data).length){
+			this.setState({isEmpty: false});
+		  }
+		  if(this.state.field=="categories" && data.categories.length)
+		  {
+			  this.setState({isEmpty: false});
+		  }
+		  if(this.state.field=="contact")
+		  {
+			  if(Object.keys(data.address).length)
+			  {
+				if(data.address.city && data.address.country && data.address.state && data.address.pincode)
+				{
+					this.setState({isEmpty: false});
+				}
+			  }
+		  }
+		  if(this.state.field=="social" && data.socialMedia)
+		  {
+			this.setState({isEmpty: false});
+		  }
 		  if(this.state.field=="edu" && data.resume.education.length){
 			this.setState({isEmpty: false});
 		  }
@@ -51,7 +76,34 @@ class EduDetails extends Component {
 
 	render() {
 	  const items = this.state.items;
-		return (<div>			
+		return (<div>
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="personal" &&
+						<div>
+						<RenderPersonal personal={items} aid={this.props.aid}></RenderPersonal>
+					</div>}
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="categories" &&
+						<div>
+						<RenderCategories empty={false} categories={items.categories} aid={this.props.aid}></RenderCategories>
+					</div>}
+					{this.state.isEmpty && this.state.field=="categories" && <div>
+						<RenderCategories empty={true} categories={items.categories} aid={this.props.aid}></RenderCategories>
+					</div>}
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="contact" &&
+						<div>
+						<RenderContact empty={false} contact={items} aid={this.props.aid}></RenderContact>
+					</div>}
+					{this.state.isEmpty && this.state.field=="contact" && <div>
+						<RenderContact empty={true} contact={items} aid={this.props.aid}></RenderContact>
+					</div>}
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="social" &&
+						<div>
+						<RenderSocial empty={false} social={items.socialMedia} aid={this.props.aid}></RenderSocial>
+					</div>}
+					{this.state.isEmpty && this.state.field=="social" && <div>
+						<RenderSocial empty={true} social={items} aid={this.props.aid}></RenderSocial>
+					</div>}
+					
+					
 					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="edu" &&
 						<div>
 						{items.resume.education.map((edu) => {
@@ -88,4 +140,4 @@ class EduDetails extends Component {
 		);
    }
 }
-export default EduDetails;
+export default Details;
