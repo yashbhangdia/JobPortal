@@ -160,10 +160,10 @@ exports.Applicant_delete = function (req, res) {
     else if(req.params.field=="ach"){
         var selector = {};
         var operator = {};
-        selector["resume.achievements."+req.body.achid] = {atitle:"delete"}; 
+        selector["resume.achievements."+req.body.achid] = {aTitle:"delete"}; 
         operator['$set'] = selector;
             Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, operator, {$new: true}).then((applicant) => {
-                Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"resume.achievements": {atitle: "delete"}}}).then((applicant) => {
+                Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"resume.achievements": {aTitle: "delete"}}}).then((applicant) => {
                     res.redirect("http://localhost:3000/buildRresume#projects");
                 })
                 .catch((error) => {

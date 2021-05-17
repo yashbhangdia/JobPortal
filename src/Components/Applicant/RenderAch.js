@@ -43,7 +43,7 @@ function RenderAch(props){
 						<button onClick={editEdu}><FaEdit size={24}></FaEdit></button><span><button onClick={deleteEdu}><RiDeleteBin5Fill size={24}></RiDeleteBin5Fill></button></span>
 					</div>}	 	 
 				 </div>
-				<ul className="col-md-10 pl-5">
+				<ul className="pl-5">
 					<li>by<span className="org">{ach.by}</span><span className="year">({ach.year.split("-")[0]})</span></li>
 					<li><p>{ach.aDesc}</p></li>
 				</ul>
