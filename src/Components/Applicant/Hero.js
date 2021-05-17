@@ -11,7 +11,7 @@ function ResumeHero(props)
         <div className="Brand">
             <h2>DreamJobs</h2>
         </div>
-        <Drawer logout={props.logout} user={props.user}></Drawer>
+        <Drawer logout={props.logout} name={props.name}></Drawer>
     
         <Typewriter
             onInit={(typewriter) => {
@@ -21,7 +21,7 @@ function ResumeHero(props)
                 .start();
             }}
             options={{
-                strings: [`Hello <span style="color: #e9896a; font-weight: 900;">`+props.user.name.split(" ")[0]+`</span>`],
+                strings: [`Hello <span style="color: #e9896a; font-weight: 900;">`+props.name.split(" ")[0]+`</span>`],
                 autoStart: true,
                 loop: true,
                 cursor: "|"

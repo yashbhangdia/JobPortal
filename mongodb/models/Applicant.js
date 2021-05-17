@@ -8,6 +8,7 @@ let ApplicantSchema = new Schema({
     username: {type: String, required: true, max:100, unique:true},
     name: {type: String, required: true, max: 100},
     password: {type: String, required: true, max: 100},
+    image : {type: String},
     email: {type: String, required:true},
     about: {type: String},
     phoneno: {type:String},
@@ -19,7 +20,6 @@ let ApplicantSchema = new Schema({
     currentSalary: {type: String},
     currentCompany: {type: String},
     categories: [{type: String, unique:true}],
-    image: {type:String},
     address: {
         city: {type: String},
         state: {type: String},

@@ -7,15 +7,8 @@ import '../Styles/Home/RecentJobs.css'
 const len = JobList.length;
 const limit = 3;
 
-function renderJobs(job){
-	return <div className="col-md-4 px-1">
-		<Jobs role={job.role} company={job.company} loc={job.loc} src={job.logo}></Jobs>
-	</div>
-}
 
-
-
-function RecentJobs(){
+function RecentJobs(props){
 	const [showMore,setShowMore] = useState(true);
 	const [list,setList] = useState(JobList.slice(0, 6));
 	const [index,setIndex] = useState(6);
@@ -38,7 +31,11 @@ function RecentJobs(){
 			</div>
 			<div className="Container">
 				<div className="row">
-					{list.map(renderJobs)}
+					{list.map((job) => {
+						return <div className="col-md-4 px-1">
+							<Jobs auth={props.auth} role={job.role} company={job.company} loc={job.loc} src={job.logo}></Jobs>
+						</div>
+					})}
 				</div>
 				<div className="row">
 					{showMore && <button className="More" onClick={loadMore}>Load More Listings</button>}

@@ -4,7 +4,7 @@ const passport = require("passport");
 
 const Applicant = require('./routes/Applicant'); // Imports routes for the Applicants
 const Company = require('./routes/Company'); // Imports routes for the Companies
-const SMS = require('./routes/sms')
+
 const app = express();
 
 // Set up mongoose connection
@@ -21,7 +21,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(cors({
-	origin: "http://localhost:3000",
+	origin: ["http://localhost:3000", "http://localhost:3000/profile"]
 }));
 
 app.use(express.urlencoded({extended: true}));
@@ -30,9 +30,10 @@ app.use(express.json());
 app.use(passport.initialize());
 require("./config/passport")(passport);
 
+app.use('/public', express.static('public'));
+
 app.use('/Applicant', Applicant);
 app.use('/Company', Company);
-app.use('/sms', SMS);
 
 let port = 1234;
 

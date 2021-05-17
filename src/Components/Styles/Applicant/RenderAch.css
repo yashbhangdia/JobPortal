@@ -1,22 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
 
-.achdetails{
-    font-family: 'Quicksand';
-}
-
 .achdetails > hr{
  margin-left: 0%;
  width: 85%;
 }
 
-
 .atitle{
 	color: #444;
-}
-
-.atitle > h5{
-    font-weight: bold;
 }
 
 .org{
@@ -25,12 +16,12 @@
 }
 
 .achdetails > ul > li {
-	color: #000 !important;
+	color: #001 !important;
 	margin-top: 0.5rem !important;
 }
 
 .achdetails > ul> li:hover{
-	color: #000 !important;
+	color: #001 !important;
 }
 
 .link > a{

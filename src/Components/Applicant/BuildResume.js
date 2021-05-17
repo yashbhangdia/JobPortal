@@ -61,7 +61,7 @@ function BuildResume(props){
                 <div className="resume-container" id="res">
         
                     <div className="resume-head row">
-                        <div className="col md-4 field">
+                        <div className="col md-4">
                         <h4>Background <span className="r-icons"><AiOutlineProfile size={30}/></span></h4> 
                         </div>
                         <div className="col md-5"></div>
@@ -72,12 +72,12 @@ function BuildResume(props){
                     </div>
             
                     <div id="education">
-                        <Details aid={user.aid} field={"edu"} edit={true}/>
+                        <Details aid={user.aid} field={"edu"}/>
                         {addEdu && <EducationForm aid={user.aid} update={false}/>}
                     </div>
 		    
                     <div className="experience-head row mt-5">
-                        <div className="col md-4 field">
+                        <div className="col md-4">
                             <h4>Work experience <span className="r-icons"><CgWorkAlt size={30}/></span></h4>
                         </div>
                         <div className="col md-5"></div>
@@ -88,12 +88,12 @@ function BuildResume(props){
                     </div>
 
                     <div id="experience">
-                        <Details aid={user.aid} field={"exp"} edit={true}/>
+                        <Details aid={user.aid} field={"exp"}/>
                         {addExp && <ExperienceForm aid={user.aid} update={false}/>}
                     </div>
 
                     <div className="skill-head row mt-5">
-                        <div className="col md-4 field">
+                        <div className="col md-4">
                             <h4>Skills <span className="r-icons"><BsListCheck size={30}/></span></h4>
                         </div>
                         <div className="col md-5"></div>
@@ -104,12 +104,12 @@ function BuildResume(props){
                     </div>
 
                     <div id="skills">
-                        <Details aid={user.aid} field={"skill"} edit={true}/>
+                        <Details aid={user.aid} field={"skill"}/>
                         {addSkill && <Skills aid={user.aid}/>}
                     </div>
 
                     <div className="project-head row mt-5">
-                        <div className="col md-4 field">
+                        <div className="col md-4">
                             <h4>Portfolio <span className="r-icons"><BsGraphUp size={30}/></span></h4>
                         </div>
                         <div className="col md-5"></div>
@@ -120,12 +120,12 @@ function BuildResume(props){
                     </div>
 
                     <div id="projects">
-                        <Details aid={user.aid} field={"proj"} edit={true}/>
+                        <Details aid={user.aid} field={"proj"}/>
                         {addProject && <ProjectForm aid={user.aid} update={false}/>}
                     </div>
 
                     <div className="achievement-head row mt-5">
-                        <div className="col md-4 field">
+                        <div className="col md-4">
                             <h4>Achievements<span className="r-icons"><AiOutlineTrophy size={30}/></span></h4>
                         </div>
                         <div className="col md-5"></div>
@@ -136,7 +136,7 @@ function BuildResume(props){
                     </div>
 
                     <div id="achievements">
-                        <Details aid={user.aid} field={"ach"} edit={true}/>
+                        <Details aid={user.aid} field={"ach"}/>
                         {addAchievement && <AchievementForm aid={user.aid} update={false}/>}
                     </div>
 

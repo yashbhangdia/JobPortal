@@ -17,7 +17,7 @@ exports.Applicant_create = function (req, res) {
             password: req.body.password,
             phoneno: req.body.phoneno,
             gender: "",
-            dob: new Date(),
+            dob: "T",
             qualification: "",
             experience: "",
             currentJob: "",
@@ -25,7 +25,12 @@ exports.Applicant_create = function (req, res) {
             currentCompany: "",
             about: "",
             image: "https://cdn2.vectorstock.com/i/thumb-large/23/81/default-avatar-profile-icon-vector-18942381.jpg",
-            address: {city: "", state: "", country: "", pincode: ""},
+            address:{
+                city: "",
+                country: "",
+                pincode: "",
+                state: ""
+            }
           });
           //Hash password before saving in database
           bcrypt.genSalt(10, (err, salt) => {
@@ -62,17 +67,17 @@ exports.Applicant_login = function (req, res) {
                     name: applicant.name,
                     email: applicant.email,
                     phoneno: applicant.phoneno,
-                    image: applicant.image,
                     Job: applicant.currentJob,
                     Company: applicant.currentCompany,
                     City: applicant.address.city,
-                    Country: applicant.address.country
+                    Country: applicant.address.country,
+                    image: applicant.image
                 };
                 jwt.sign(
                     payload,
                     keys.secretOrKey,
                     {
-                        expiresIn: 1800 // 1 month in seconds
+                        expiresIn: 604800 // 1 month in seconds
                     },
                     (err, token) => {
                         res
@@ -202,6 +207,39 @@ exports.Applicant_update = function (req, res) {
                 console.log('Applicant Not found! ', error);
             });
     }
+    if(req.params.field=="contact1")
+    {
+        Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$set: {"address": req.body}}, {$new: true}).then((applicant) => {
+            if(applicant){
+                res.redirect("http://localhost:3000/profile#contact");
+            }
+        })
+        .catch((error) => {
+            console.log('Applicant Not found! ', error);
+        });  
+    }
+    if(req.params.field=="contact2")
+    {
+        Applicant.findOneAndUpdate({Applicant_Id: req.params.aid},  req.body, {$new: true}).then((applicant) => {
+            if(applicant){
+                res.redirect("http://localhost:3000/profile#contact");
+            }
+        })
+        .catch((error) => {
+            console.log('Applicant Not found! ', error);
+        });  
+    }
+    if(req.params.field=="social")
+    {
+        Applicant.findOneAndUpdate({Applicant_Id: req.params.aid},  {$set: {"socialMedia": req.body}}, {$new: true}).then((applicant) => {
+            if(applicant){
+                res.redirect("http://localhost:3000/profile#social");
+            }
+        })
+        .catch((error) => {
+            console.log('Applicant Not found! ', error);
+        });  
+    }
     if(req.params.field=="edu"){
             Applicant.findOneAndUpdate({$and: [{Applicant_Id: req.params.aid}, {"resume.education.etype": req.body.etype}]}, {$set: {"resume.education.$": req.body}}, {$new: true}).then((applicant) => {
                 //check if edu details exist based on etype -> if exists -> update else push
@@ -299,5 +337,22 @@ exports.Applicant_update = function (req, res) {
             });
         }
         
+};
+
+exports.Applicant_updatephoto = function (req, res) {
+    var url = req.protocol + '://' + req.get('host')
+    var path = req.file.path.replace(/\\/i, "/")
+    var name= url + "/" + path
+    //console.log(name);
+    Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$set: {'image': name}}, {$new: true}).then((data) =>{
+        if(data)
+        {
+            //console.log(data);
+        }
+    })
+    .catch((error) => {
+        console.log('Applicant Not found! ', error);
+    });
+
 };
 
