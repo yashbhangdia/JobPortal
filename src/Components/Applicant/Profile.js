@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 import {IoIosArrowBack} from 'react-icons/io';
 import '../Styles/Applicant/Profile.css';
+import { useReducer } from 'react';
 
 function Profile(props)
 {
@@ -21,7 +22,7 @@ function Profile(props)
 
     return(
         <div className="Profile">
-            <Hero logout={onLogoutClick} name={user.name}/>
+            <Hero logout={onLogoutClick} user={user}/>
         <div className="row mx-0 mt-5 pb-5">
             <div className="col-lg-3" style={{borderRight: "1px solid #eee"}}>
                 <button className="goback" onClick={props.history.goBack}><IoIosArrowBack className="backicon" size={24}/><span>Dashboard</span></button>
@@ -36,7 +37,7 @@ function Profile(props)
                     <Details aid={user.aid} field={"personal"}/>
                 </div>
                 <div id="categories">
-                    <Details aid={user.aid} field={"categories"}/>
+                    <Details aid={user.aid} field={"categories"} />
                 </div>
                 <div id="contact">
                     <Details aid={user.aid} field={"contact"}/>

@@ -13,7 +13,7 @@ import RenderCategories from './RenderCategories';
 import RenderContact from './RenderContact';
 import RenderSocial from './RenderSocial';
 import {FaBirthdayCake, FaBusinessTime, FaFacebook, FaLinkedinIn, FaTwitter, FaUserGraduate, FaGithub} from 'react-icons/fa';
-import {IoLocationOutline} from 'react-icons/io';
+import {IoLocationOutline} from 'react-icons/io5';
 import {GiMale, GiFemale, GiMoneyStack} from 'react-icons/gi';
 
 class Details extends Component {
@@ -22,7 +22,8 @@ class Details extends Component {
 		items: {},
 		isLoaded: false,
 		isEmpty: true,
-		field: this.props.field
+		field: this.props.field,
+		isEdit: this.props.edit
 	};
 
 	componentDidMount() {
@@ -69,6 +70,9 @@ class Details extends Component {
 		  if(this.state.field=="social" && data.socialMedia){
 			this.setState({isEmpty: false});
 		  }
+		  if(this.state.field=="socialIcons" && data.socialMedia){
+			this.setState({isEmpty: false});
+		  }
 		  if(this.state.field=="skill" && data.resume.skills.length){
 			this.setState({isEmpty: false});
 		  } 
@@ -105,7 +109,7 @@ class Details extends Component {
 						<div>
 						<RenderSocial empty={false} social={items.socialMedia} aid={this.props.aid}></RenderSocial>
 					</div>}
-					{this.state.isEmpty && this.state.field=="social" && <div>
+					{this.state.isEmpty && this.state.field=="social" &&<div>
 						<RenderSocial empty={true} social={items} aid={this.props.aid}></RenderSocial>
 					</div>}
 					
@@ -203,7 +207,7 @@ class Details extends Component {
 						</div>
 					</div>
 					}
-					{this.state.isLoaded && !this.state.isEdit && !this.state.isEmpty && this.state.field=="social" &&
+					{this.state.isLoaded && !this.state.isEdit && !this.state.isEmpty && this.state.field=="socialIcons" &&
 					<ul className="socialMedia">
 						{items.socialMedia.facebook!="" && <li><a href={items.socialMedia.facebook}><FaFacebook style={{color:"#3b5998"}} size={40}/></a></li>}
 						{items.socialMedia.linkedin!="" && <li><a href={items.socialMedia.linkedin}><FaLinkedinIn style={{color:"#0077b5"}} size={40}/></a></li>}
@@ -211,9 +215,6 @@ class Details extends Component {
 						{items.socialMedia.github!="" && <li><a href={items.socialMedia.github}><FaGithub style={{color:"#333"}} size={40}/></a></li>}
 					</ul>
 					}
-						{items.resume.achievements.map((ach, ind) => {
-							return(<div><RenderAch ach={ach} aid={this.props.aid} achid={ind} /></div>)
-						})}
 					</div>
 		);
    }

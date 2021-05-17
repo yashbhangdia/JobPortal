@@ -29,6 +29,7 @@ app.use(express.json());
 
 app.use(passport.initialize());
 require("./config/passport")(passport);
+app.use('/public', express.static('public'));
 
 app.use('/Applicant', Applicant);
 app.use('/Company', Company);
