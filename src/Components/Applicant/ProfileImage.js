@@ -43,7 +43,7 @@ function ProfileImage(props)
             console.log(err);
         });
 
-        window.location.reload(false);
+        window.location.reload(true);
     }
 
     return(<div className="py-3 profileimage">

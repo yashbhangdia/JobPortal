@@ -11,7 +11,7 @@ import Skills from './SkillsForm';
 import Details from './Details';
 import "../Styles/Applicant/BuildResume.css";
 import {AiOutlineProfile, AiOutlineTrophy} from 'react-icons/ai';
-import {IoIosAddCircle} from 'react-icons/io';
+import {IoIosAddCircle, IoIosArrowBack} from 'react-icons/io';
 import {CgWorkAlt} from 'react-icons/cg';
 import {BsListCheck, BsGraphUp} from 'react-icons/bs';
 import { logoutUser } from "../../actions/authActions";
@@ -51,9 +51,10 @@ function BuildResume(props){
 
 	return(
 	<div>
-        <Hero logout={onLogoutClick} name={user.name}/>
+        <Hero logout={onLogoutClick} user={user}/>
         <div className="row mx-0 mt-5 pb-5">
             <div className="col-lg-3" style={{borderRight: "1px solid #eee"}}>
+            <button className="goback" onClick={props.history.goBack}><IoIosArrowBack className="backicon" size={24}/><span>Dashboard</span></button>
                 <SideNav logout={onLogoutClick} />
                 <CircularProgress/>
             </div>
