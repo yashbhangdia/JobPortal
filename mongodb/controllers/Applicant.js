@@ -182,6 +182,14 @@ exports.Applicant_delete = function (req, res) {
                     console.log('Skill Not Deleted! ', error);
                 });
     }
+    else if(req.params.field=="apply"){
+        Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$pull:{"applied": req.body.appid}}).then((applicant) => {
+            return res;
+        })
+        .catch((error) => {
+            console.log('Application IDs not deleted ', error);
+        });
+    }
 };
 
 exports.Applicant_update = function (req, res) {
@@ -334,6 +342,15 @@ exports.Applicant_update = function (req, res) {
             })
             .catch((error) => {
                 console.log('Applicant Not found! ', error);
+            });
+        }
+
+        else if(req.params.field=="apply"){
+            Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$push:{"applied": req.body.appid}}).then((applicant) => {
+                return res;
+            })
+            .catch((error) => {
+                console.log('Application IDs not updated ', error);
             });
         }
         

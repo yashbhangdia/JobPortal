@@ -1,6 +1,7 @@
 var Application = require('../models/Application');
 var alert = require('alert');
 
+
 exports.Application_create = function (req, res) {
     
     var application = new Application(
@@ -8,7 +9,7 @@ exports.Application_create = function (req, res) {
             JobID: req.body.jid,
             ApplicantID: req.body.aid,
             DoA: req.body.date,
-            aStatus: false
+            aStatus: 0
         }
     );
     
@@ -16,8 +17,9 @@ exports.Application_create = function (req, res) {
         if (err) {
             console.log(err);
         }
-        alert('Application Created successfully');
-        res.redirect("http://localhost:3000/");
+        else{
+            return res.json(application._id);
+        }    
     })
 };
 
@@ -42,7 +44,15 @@ exports.Application_update = function (req, res) {
 exports.Application_delete = function (req, res) {
    	Application.findOneAndDelete({_id: req.params.appid}, function (err) {
         if (err) console.log(err);
-        alert('Applicant Deleted successfully');
-        res.redirect("http://localhost:3000/dummy");
+        return res;
     })
+};
+
+exports.Application_details_individual = function (req, res) {
+    Application.find({'ApplicantID': req.params.aid}).then((data) => {
+            return res.json(data);
+    })
+    .catch((error) => {
+        console.log('error: ', error);
+    });
 };

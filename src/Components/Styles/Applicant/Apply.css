@@ -3,7 +3,8 @@
 .companylogo > img
 {
   height: 5rem;
-  width: 9rem;
+  width: 7rem;
+  border-radius: 25%;
 }
 
 .compdetails
@@ -23,10 +24,13 @@
 }
 
 .skillspan{
+  display: inline-block;
   border: 2px solid #e9896a;
   border-radius: 6px;
   padding: 0% 3%;
-  margin: 2% 2%;
+  margin: 1%;
+  color: #111 !important;
+  font-weight: bold;
 }
 
 .confirm
@@ -132,4 +136,8 @@
   color: #111 !important;
   border: 2px solid #e9896a !important;
   background-color: white !important;
+}
+
+.jobdeets{
+  margin-bottom: 1%;
 }

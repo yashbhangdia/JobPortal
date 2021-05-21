@@ -1,5 +1,6 @@
 import React, { Component}  from 'react';
 import axios from 'axios';
+import {Table} from 'reactstrap';
 import EducationForm from './EducationForm';
 import ProjectForm from './ProjectForm';
 import RenderEdu from './RenderEdu';
@@ -15,7 +16,6 @@ import RenderSocial from './RenderSocial';
 import {FaBirthdayCake, FaBusinessTime, FaFacebook, FaLinkedinIn, FaTwitter, FaUserGraduate, FaGithub} from 'react-icons/fa';
 import {IoLocationOutline} from 'react-icons/io5';
 import {GiMale, GiFemale, GiMoneyStack} from 'react-icons/gi';
-import RenderJobs from './RenderApplied';
 import RenderApplied from './RenderApplied';
 
 class Details extends Component {
@@ -78,7 +78,7 @@ class Details extends Component {
 		  if(this.state.field=="skill" && data.resume.skills.length){
 			this.setState({isEmpty: false});
 		  } 
-		  if(this.state.field=="applied")
+		  if(this.state.field=="applied" && data.applied.length)
 		  {
 			this.setState({isEmpty: false});
 		  }
@@ -119,8 +119,23 @@ class Details extends Component {
 						<RenderSocial empty={true} social={items} aid={this.props.aid}></RenderSocial>
 					</div>}
 					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="applied" && <div>
-						<RenderApplied empty={false} aid={this.props.aid} applied={items.applied}></RenderApplied>	
-					</div>}
+						<Table>
+							<thead>
+							  <tr>
+								<th>Applied Job</th>
+								<th>Position</th>
+								<th>Date</th>
+								<th>Status</th> 
+								<th></th>
+							  </tr>
+							</thead>
+							
+							{items.applied.map((job) => {
+								return <RenderApplied empty={false} aid={this.props.aid} applied={job} ></RenderApplied>
+							})}
+							</Table>						
+						</div>
+					}		
 					{this.state.isEmpty && this.state.field=="applied" &&< div>
 						<div>No Applied Jobs :(</div>
 					</div>}
@@ -256,7 +271,7 @@ class Details extends Component {
 						</div>
 					</div>
 					}
-					{this.state.isLoaded && !this.state.isEdit && this.state.field=="socialMedia" &&
+					{this.state.isLoaded && !this.state.isEdit && this.state.field=="socialIcons" &&
 					<ul className="socialMedia">
 						{items.socialMedia.facebook!="" && <li><a href={items.socialMedia.facebook}><FaFacebook style={{color:"#3b5998"}} size={40}/></a></li>}
 						{items.socialMedia.linkedin!="" && <li><a href={items.socialMedia.linkedin}><FaLinkedinIn style={{color:"#0077b5"}} size={40}/></a></li>}

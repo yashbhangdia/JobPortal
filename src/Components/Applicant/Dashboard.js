@@ -35,7 +35,7 @@ class Dashboard extends Component
                     <DashboardCards/>
                 </div>
             </div>
-            <RecentJobs auth={true}/>
+            <div id="viewJobs"><RecentJobs auth={true} aid={user.aid}/></div>
             <Footer/>
         </div>
     );

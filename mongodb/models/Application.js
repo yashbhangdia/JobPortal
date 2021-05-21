@@ -6,7 +6,7 @@ let ApplicationSchema = new Schema({
 		JobID: {type: ObjectId, required: true},
 		ApplicantID: {type: Number, required: true},
 		DoA: {type: Date, default: new Date()},
-		aStatus: {type: Boolean, default: false}
+		aStatus: {type: Number, default: 0}
 	}
 	);
 

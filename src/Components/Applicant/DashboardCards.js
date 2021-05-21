@@ -32,7 +32,7 @@ function DashboardCards()
             </div>
             <div className="row pb-3 px-5 DashCards">
                 <div className="col-lg-6 dashcard r">
-                    <a href="/applied">
+                    <a href="/applied#appliedjobs">
                     <HiOutlineBriefcase size={70} className="icon"/>
                     <h4>Applied Jobs</h4>
                     <p>14 Applications</p>

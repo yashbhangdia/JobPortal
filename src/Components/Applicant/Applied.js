@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 import {IoIosArrowBack} from 'react-icons/io';
 import '../Styles/Applicant/Profile.css';
-import { useReducer } from 'react';
 
 function Applied(props)
 {
@@ -18,7 +17,6 @@ function Applied(props)
         props.logoutUser();
     };
     const { user } = props.auth;
-
 
     return(
     <div className="Applied">
@@ -38,6 +36,7 @@ function Applied(props)
                 </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
     );
 }
