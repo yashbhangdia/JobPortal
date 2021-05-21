@@ -10,7 +10,8 @@ let CompanySchema = new Schema({
 	About_Us : {type: String},
 	Location : {type: String},
 	Contact : {type: String, require:true},
-	Email_Id : {type: String}
+	Email_Id : {type: String},
+    logo: {type: String}
 });
 
 const Counter = mongoose.model('Counter', counterSchema, "C_Counter");

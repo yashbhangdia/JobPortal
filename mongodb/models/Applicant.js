@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+var ObjectId = Schema.ObjectId;
 var counterSchema = require('./counter');
 
 let ApplicantSchema = new Schema({
@@ -64,7 +64,8 @@ let ApplicantSchema = new Schema({
             aDesc: {type: String, default:""},
             aLink: {type: String, default: ""}
         }]
-    }
+    },
+    applied:[{type: ObjectId}]
 });
 
 const Counter = mongoose.model('Counter', counterSchema, "A_Counter");

@@ -19,7 +19,7 @@ function DrawerComponent(props)
         setShow(false);
     }
     
-    console.log(user);
+    //console.log(user);
 
     return(
     <div>

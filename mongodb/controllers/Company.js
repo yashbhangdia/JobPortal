@@ -25,10 +25,12 @@ exports.Company_create = function (req, res) {
 };
 
 exports.Company_details = function (req, res) {
-    Company.findOne({Company_Id: req.params.Company_Id}, function (err, company) {
-        if (err) console.log(err);
-        res.send(company);
+    Company.findOne({Company_Id: req.params.cid}).then((data) => {
+        return res.json(data);
     })
+    .catch((error) => {
+        console.log('error: ', error);
+    });
 };
 
 exports.Company_update = function (req, res) {

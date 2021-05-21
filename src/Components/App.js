@@ -5,6 +5,7 @@ import Dummy from './Dummy/dummy';
 import Dashboard from './Applicant/Dashboard';
 import BuildResume from './Applicant/BuildResume';
 import Profile from './Applicant/Profile';
+import Applied from './Applicant/Applied';
 import Resume from './Applicant/Resume';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
@@ -44,6 +45,7 @@ function App(){
 					<PrivateRoute path="/Dashboard" component={Dashboard} exact/>
 					<PrivateRoute path="/profile" component={Profile} exact/>
 					<PrivateRoute path="/resume" component={Resume} exact/>
+					<PrivateRoute path="/applied" component={Applied} exact/>
 					<PrivateRoute path="/buildResume" component={BuildResume} exact/>
 				</Switch>
 			</Router>

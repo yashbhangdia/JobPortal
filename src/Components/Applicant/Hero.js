@@ -18,7 +18,7 @@ function ResumeHero(props)
           setIsLoaded(true);
         })
 		.catch(() => {
-		  alert("error retrieving data");
+		  //alert("error retrieving data");
 		});
     })
     return(<div>

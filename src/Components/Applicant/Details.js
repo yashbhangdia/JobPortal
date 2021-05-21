@@ -15,6 +15,8 @@ import RenderSocial from './RenderSocial';
 import {FaBirthdayCake, FaBusinessTime, FaFacebook, FaLinkedinIn, FaTwitter, FaUserGraduate, FaGithub} from 'react-icons/fa';
 import {IoLocationOutline} from 'react-icons/io5';
 import {GiMale, GiFemale, GiMoneyStack} from 'react-icons/gi';
+import RenderJobs from './RenderApplied';
+import RenderApplied from './RenderApplied';
 
 class Details extends Component {
 	
@@ -30,7 +32,7 @@ class Details extends Component {
 		axios.get("http://localhost:1234/Applicant/"+this.props.aid)
 		.then((response) => {
 		  const data = response.data;
-		  //console.log(data);
+		  console.log(data);
 		  this.setState({ items: data, isLoaded: true});
 		  console.log("fine1");
 		  if(this.state.field=="personal" && Object.keys(data).length){
@@ -76,10 +78,14 @@ class Details extends Component {
 		  if(this.state.field=="skill" && data.resume.skills.length){
 			this.setState({isEmpty: false});
 		  } 
+		  if(this.state.field=="applied")
+		  {
+			this.setState({isEmpty: false});
+		  }
 		  //console.log('Data has been received!!');
 		})
 		.catch(() => {
-		  alert("error retrieving data");
+		  //alert("error retrieving data");
 		});
 	}
 
@@ -111,6 +117,12 @@ class Details extends Component {
 					</div>}
 					{this.state.isEmpty && this.state.field=="social" &&<div>
 						<RenderSocial empty={true} social={items} aid={this.props.aid}></RenderSocial>
+					</div>}
+					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="applied" && <div>
+						<RenderApplied empty={false} aid={this.props.aid} applied={items.applied}></RenderApplied>	
+					</div>}
+					{this.state.isEmpty && this.state.field=="applied" &&< div>
+						<div>No Applied Jobs :(</div>
 					</div>}
 					
 					{this.state.isLoaded && !this.state.isEmpty && this.state.field=="edu" &&
