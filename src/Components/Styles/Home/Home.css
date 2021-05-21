@@ -92,6 +92,13 @@
   width: 60%;
 }
 
+.signin:hover {
+  color: #e9896a !important;
+}
+
+.signin{
+  color: #111;
+}
 
 /* Modal Styles */
 .rs-modal-dialog

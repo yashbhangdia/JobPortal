@@ -3,7 +3,8 @@ import
 {
     Form,
 	Input,
-    Button
+    Button,
+    Label
 } from 'reactstrap';
 import { Modal } from 'rsuite';
 import { Divider } from 'rsuite';
@@ -17,6 +18,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
+import Login from "./Login";
 
 var alert = require('alert');
 
@@ -31,11 +33,25 @@ class Register extends Component{
           phoneno: "",
           candidate: true,
           employer: false,
-          errors: {}
+          errors: {},
+          login: false,
+          signup: true
         };
 
         this.control = this.control.bind(this);
+        this.loginopen = this.loginopen.bind(this);
+        this.loginclose = this.loginclose.bind(this);
+
       }
+
+      loginopen() {
+        this.setState({ login: true });
+        this.setState({signup: false});
+      }
+
+      loginclose(){
+        this.setState({ login: false });
+        }
 
       componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
@@ -74,8 +90,8 @@ class Register extends Component{
 
     render() {
         const { errors } = this.state;
-        return (
-            <Modal show={this.props.signup} onHide={this.props.close} backdrop="static" size="xs">
+        return (<div>
+            {this.state.signup && <Modal show={this.props.signup} onHide={this.props.close} backdrop="static" size="xs">
             <Modal.Header>
             </Modal.Header>
             <Modal.Body>
@@ -115,12 +131,16 @@ class Register extends Component{
                     <div className="cfield">
                     <Input type="submit" value="Sign Up" className="Submitbutton"/>
                     </div>
+                    <div className="cfield mt-3">
+                    <Label><a onClick={this.loginopen} className="signin">Sign In</a></Label>
+                    </div>
                 </Form>
             </Modal.Body>
-        </Modal>
-        );
-      }
-    }
+        </Modal>}
+        {!this.state.signup && <Login open={this.loginopen} close={this.loginclose} login={this.state.login}/>}
+        </div>
+        );}
+}
 
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,

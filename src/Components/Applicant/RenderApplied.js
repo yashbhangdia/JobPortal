@@ -2,86 +2,93 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import '../Styles/Applicant/RenderApplied.css';
 import {RiDeleteBin5Fill} from 'react-icons/ri';
-import {Table} from 'reactstrap';
+import {Badge} from 'reactstrap';
 import {IoLocationOutline} from 'react-icons/io5';
 
 function RenderApplied(props)
 {
-    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const [appliedlist, setappliedlist] = useState(props.applied)
     const [date, setdate] = useState("")
-    const [jobrole, setjobrole] = useState("")
-    const [comp, setcomp] = useState("")
-    const [loc, setloc] = useState("")
+    const [joblist, setjoblist] = useState({})
+    const [complist, setcomplist] = useState({})
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [status, setStatus] = useState("secondary")
+    const [aStatus, setAStatus] = useState("Applied");
+    const [isDelete, setIsDelete] = useState(false);
 
-    const [isEdit, setIsEdit] = useState(false);
-    function editPersonal(){
-		setIsEdit(true);
-	}
+    function handleDelete(e){
+      var appid = props.applied;
+      axios({
+        method: 'delete',
+        url: "http://localhost:1234/Application/"+appid+"/delete",
+        headers: {}, 
+        });
+      axios({
+        method: 'delete',
+          url: "http://localhost:1234/Applicant/"+appliedlist.ApplicantID+"/delete/apply",
+          headers: {}, 
+          data: {
+            appid: appid// This is the body part
+          }
+        });
+      axios({
+          method: 'put',
+          url: "http://localhost:1234/Job/"+appliedlist.JobID+"/updateApp/del",
+        });
+      alert("Application Withdrawn Successfully!");
+      setIsDelete(true);
+  }
 
-    function retrieveComp(id) {
-        axios.get("http://localhost:1234/Company/"+id)
-        .then( (res) => {
-          setcomp(res.data.Company_Name);
-          setloc(res.data.Location);
-        } )
-        .catch( (err) => {
-            alert('Error retrieving Company details.');
-        } )
-    }
 
-    function retrieveJob(id) {
-        axios.get("http://localhost:1234/Job/"+id)
-        .then( (res) => {
-          setjobrole(res.data.role);
-          //console.log(res.data.companyID);
-          retrieveComp(res.data.companyID)  
-        } )
-        .catch( (err) => {
-            alert('Error retrieving Job details.');
-        } )
-    }
+    useEffect(() => {
+            
+            axios.get("http://localhost:1234/Application/"+props.applied)
+            .then((res) => { 
+                setappliedlist(res.data);
+                setdate(new Date(res.data.DoA.split("T")[0]).toString());
+                var color = res.data.status;
+                
+                if(color==1){
+                  setStatus("Warning");
+                  setAStatus("Shortlisted")
+                }
+                else if(color==2){
+                  setStatus("Success");
+                  setAStatus("Accepted")
+                }
+                else if(color==3){
+                  setStatus("Danger");
+                  setAStatus("Rejected")
+                }
 
-    function retrieveApp(id) {
-        axios.get("http://localhost:1234/Application/"+id)
-        .then( (res) => {
-            setdate(new Date(res.data.DoA.split("T")[0]).toString());
-            retrieveJob(res.data.JobID);
-        } )
-        .catch( (err) => {
-            alert('Error retrieving Application details.');
-        } )
-    }
+                axios.get("http://localhost:1234/Job/"+res.data.JobID)
+                .then((res) => {
+                  setjoblist(res.data);
 
-    return(<div>
-    <Table>
-      <thead>
-        <tr>
-          <th>Applied Job</th>
-          <th>Position</th>
-          <th>Date</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        { appliedlist.map( (item) => {
-            retrieveApp(item);
-            return <tr>
+                  axios.get("http://localhost:1234/Company/"+res.data.companyID)
+                  .then((res) => {
+                    setcomplist(res.data);
+                    setIsLoaded(true);
+                  })
+                })                
+            })
+    },[]);
+
+    return(<tbody>
+        {isLoaded && !isDelete && <tr>
             <td>
                 <ul className="appliedcompany">
-                   <li>{comp}</li>
-                   <li className="appliedlocation"><IoLocationOutline />{loc}</li> 
+                   <li>{complist.Company_Name}</li>
+                   <li className="appliedlocation"><IoLocationOutline />{complist.Location}</li> 
                 </ul>
             </td>
-            <td>{jobrole}</td>
+            <td>{joblist.role}</td>
             <td>{ date.split(" ")[1] + " " + date.split(" ")[2] + ", " + date.split(" ")[3] }</td>
-            <td><RiDeleteBin5Fill size={20} className="r-icons"/></td>
-          </tr>
-        })}
-      </tbody>
-    </Table>
-
-    </div>);
+            <td><Badge color={status}>{aStatus}</Badge></td>
+            <td><button style={{backgroundColor:"transparent"}} onClick={handleDelete}><RiDeleteBin5Fill size={20} className="r-icons"/></button></td>
+            </tr>
+        }
+    </tbody>);
 }
 
 export default RenderApplied;

@@ -6,13 +6,12 @@ import ApplyComp from '../Applicant/Apply';
 
 function Jobs(props){
 
+
 	const jobDesc = props.jobDesc;
 	const [signup, showsignup] = useState(false);
 	const [Apply, showApply] = useState(false);
 	const [isLoaded, setLoaded] = useState(false);
 	const [comp, setComp] = useState({});
-
-	console.log(props.compid);
 
 	const toggleSignup = e => {
 		showsignup(!signup);
@@ -76,7 +75,7 @@ function Jobs(props){
 					{signup && <Register open={toggleSignup} close={toggleSignup} signup={signup}/>}
 					{isLoaded && Apply && <ApplyComp src={comp.logo} company={comp.Company_Name} loc={comp.Location} role={props.role}
 								skills={jobDesc.skillSet} desc={jobDesc.description} perks={jobDesc.perks}
-								salary={props.salary} open={toggleApply} close={toggleApply} apply={Apply} />}
+								salary={props.salary} dur={props.dur} pos={props.pos} deadline={props.deadline} jid={props.jid} aid={props.aid} open={toggleApply} close={toggleApply} apply={Apply} />}
 					</div>
 				</div>	
 			</div>}
