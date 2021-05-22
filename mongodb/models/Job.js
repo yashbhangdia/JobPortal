@@ -46,6 +46,25 @@ const jobSchema = new Schema({
 	salary: {
 		type: Number,
 		required: true
+	},
+	name: {//
+		type: String,
+		required: true
+	},
+	email: {//
+		type: String,
+		required: true
+	},
+	location:{
+		type:String,
+	},
+	jobType: {
+		type: Number,
+		required: true
+	},
+	image: {
+		type: String,
+		default: "astronaut.png"
 	}
 })
 

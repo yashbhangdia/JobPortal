@@ -17,7 +17,7 @@ class App extends Component {
           <SearchComponent></SearchComponent>
         </div>
         <RecentJobs />
-        <Stats />
+        <Stats/>
         <Companies />
         <Testimonial />
         <Footer/>

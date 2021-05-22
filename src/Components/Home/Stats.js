@@ -8,6 +8,7 @@ function Stats(props)
 {
   
     return(
+        <div>
         <div className="stats">
         <div className="heading pt-5">
             <h1>Job Hunt Site Stats</h1>
@@ -22,6 +23,7 @@ function Stats(props)
                 <h5 className="countername">{count.desc}</h5>
                </div>
             })}
+        </div>
         </div>
         </div>
     );

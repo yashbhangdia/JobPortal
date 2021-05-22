@@ -47,3 +47,19 @@ button.More:hover{
 	color: #000;
 	text-decoration: none;
 }
+
+.filter-button
+{
+  border-radius: 6px;
+  border: 1px solid #e9896a;
+  color: #000;
+}
+.filter-button:hover{
+  border: 1px solid #000;
+  color: white;
+  background-color: #000;
+}
+
+#stats{
+  height: 2rem;
+}
