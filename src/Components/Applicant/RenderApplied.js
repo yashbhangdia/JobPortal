@@ -46,25 +46,25 @@ function RenderApplied(props)
             .then((res) => { 
                 setappliedlist(res.data);
                 setdate(new Date(res.data.DoA.split("T")[0]).toString());
-                var color = res.data.status;
+                var color = res.data.aStatus;
                 
                 if(color==1){
-                  setStatus("Warning");
-                  setAStatus("Shortlisted")
+                  setStatus("warning");
+                  setAStatus("Shortlisted");
                 }
                 else if(color==2){
-                  setStatus("Success");
+                  setStatus("success");
                   setAStatus("Accepted")
                 }
                 else if(color==3){
-                  setStatus("Danger");
+                  setStatus("danger");
                   setAStatus("Rejected")
                 }
 
                 axios.get("http://localhost:1234/Job/"+res.data.JobID)
                 .then((res) => {
                   setjoblist(res.data);
-
+                  
                   axios.get("http://localhost:1234/Company/"+res.data.companyID)
                   .then((res) => {
                     setcomplist(res.data);
