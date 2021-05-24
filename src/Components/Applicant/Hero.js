@@ -24,7 +24,7 @@ function ResumeHero(props)
     return(<div>
     { isLoaded && <div className="ResumeHero">
         <div className="Brand">
-            <h2>DreamJobs</h2>
+            <a href="http://localhost:3000/Dashboard" style={{color: "white", textDecoration: "none"}}><h2>DreamJobs</h2></a>
         </div>
         <Drawer logout={props.logout} user={user}></Drawer>
     

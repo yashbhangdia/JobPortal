@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../Styles/Home/Footer.css';
-import Target from '../Images/Target.png';
+import Logo from '../Images/logo.png';
 import envelope from '../Images/envelope.gif';
 import {Link} from 'react-router-dom';
 
@@ -26,8 +26,7 @@ function Footer()
             <div className="Footer">
                 <div className="row mx-0">
                     <div className="col-md-2 Logo mr-5">
-                        <img src={Target} className="col-md-9"></img>
-                        <h2>DreamJob</h2>
+                        <img src={Logo} style={{height:"200px"}} className="col-md-12"></img>
                     </div>
                     <div className="col-md-4 content">
                         <h5>Frequently Asked Questions</h5>

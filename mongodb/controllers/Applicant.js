@@ -17,7 +17,7 @@ exports.Applicant_create = function (req, res) {
             password: req.body.password,
             phoneno: req.body.phoneno,
             gender: "",
-            dob: "T",
+            dob: new Date(),
             qualification: "",
             experience: "",
             currentJob: "",
@@ -30,6 +30,21 @@ exports.Applicant_create = function (req, res) {
                 country: "",
                 pincode: "",
                 state: ""
+            },
+            resume:{
+                education: [],
+                experience: [],
+                skills: [],
+                projects: [],
+                achievements: []
+            },
+            applied: [],
+            categories: [],
+            socialMedia: {
+                facebook: "",
+                linkedin: "",
+                twitter: "",
+                github: ""
             }
           });
           //Hash password before saving in database
@@ -364,7 +379,7 @@ exports.Applicant_updatephoto = function (req, res) {
     Applicant.findOneAndUpdate({Applicant_Id: req.params.aid}, {$set: {'image': name}}, {$new: true}).then((data) =>{
         if(data)
         {
-            console.log(data);
+            //console.log(data);
             //res.redirect("http://localhost:3000/profile");
         }
     })

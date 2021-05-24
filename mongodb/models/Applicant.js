@@ -19,7 +19,7 @@ let ApplicantSchema = new Schema({
     currentJob: {type: String},
     currentSalary: {type: String},
     currentCompany: {type: String},
-    categories: [{type: String, unique:true}],
+    categories: [{type: String}],
     address: {
         city: {type: String},
         state: {type: String},
@@ -49,7 +49,7 @@ let ApplicantSchema = new Schema({
             role: {type: String, default:""},
             workDesc: {type: String, default:""},
         }],
-        skills: [{type: String, unique:true}],
+        skills: [{type: String}],
         projects:
         [{   
             title: {type: String, default: ""},
