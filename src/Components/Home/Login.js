@@ -86,7 +86,7 @@ class Login extends Component{
                 <Modal.Body>
                     <h3 className="modalHeading">User Login</h3>
                     <Button className={"controlbutton " + (this.state.candidate ? "selected" : "")} onClick={this.control}>Candidate</Button>{' '}
-                    <Button className={"controlbutton " + (this.state.employer ? "selected" : "")} onClick={this.control}>Employer</Button>
+                    {/* <Button className={"controlbutton " + (this.state.employer ? "selected" : "")} onClick={this.control}>Employer</Button> */}
                     <Form noValidate onSubmit={this.onSubmit} className="pt-4">
                         <div className="cfield">
                             <Input type="text" name="username" id="username" placeholder="Username" onChange={this.onChange} value={this.state.name} error={errors.email}
